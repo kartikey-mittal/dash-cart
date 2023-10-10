@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 const StoreCard = ({ shopName, shopType, shopAddress }) => {
     return (
+
         <TouchableOpacity style={{
             margin: 10,
             flexDirection: 'row',
@@ -37,7 +38,10 @@ const StoreCard = ({ shopName, shopType, shopAddress }) => {
                 borderBottomRightRadius: 10,
             }} />
         </TouchableOpacity>
+
+
     );
 };
 
 export default StoreCard;
+

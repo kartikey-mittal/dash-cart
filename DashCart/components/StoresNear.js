@@ -13,7 +13,8 @@ const StoresNear = () => {
 
     return (
 
-        <View>
+
+        <ScrollView>
 
 
             <View style={{ height: 1, width: 77, backgroundColor: 'gray', marginTop: 10, marginLeft: 5 }} />
@@ -33,7 +34,10 @@ const StoresNear = () => {
                 }
             </ScrollView>
 
-        </View >
+
+
+
+        </ScrollView >
 
     );
 };

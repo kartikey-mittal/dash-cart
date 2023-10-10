@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="CartScreen" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="StorePage" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="StorePage" component={StorePage} />
         <Stack.Screen name="CartScreen" component={CartScreen} />

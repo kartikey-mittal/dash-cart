@@ -15,7 +15,7 @@ const HomeScreen = () => {
             <SearchBar />
             <CategoryComponent />
             <StoresNear />
-            <StoreCard />
+
 
             {/* Rest of your screen components go here */}
         </SafeAreaView>
