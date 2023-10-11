@@ -4,7 +4,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 const CategoryComponent = () => {
     return (
         <View>
-            <Text style={{ fontSize: 20, paddingLeft: 5, paddingTop: 5 }}>Shops by Category</Text>
+            <Text style={{ fontSize: 20, paddingLeft: 5, paddingTop: 5,fontFamily:'DMSans'}}>Shops by Category</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <View style={{ flexDirection: 'column' }}>
                     {[1, 2].map((row) => (

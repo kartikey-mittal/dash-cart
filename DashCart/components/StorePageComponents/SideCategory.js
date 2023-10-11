@@ -5,8 +5,8 @@ const { width } = Dimensions.get('window');
 
 const Card = ({ title, status, onPress }) => (
   <TouchableOpacity onPress={onPress} style={{ backgroundColor: '#d9d9d9', margin: 10, padding: 10, borderRadius: 10, width: 74, height: 64 }}>
-    <Text style={{ fontSize: 9, justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>{title}</Text>
-    <Text style={{ fontSize: 9, justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>{status}</Text>
+    <Text style={{ fontSize: 9, justifyContent: 'center', alignContent: 'center', alignItems: 'center' ,fontFamily:'DMSans'}}>{title}</Text>
+    <Text style={{ fontSize: 9, justifyContent: 'center', alignContent: 'center', alignItems: 'center' ,fontFamily:'DMSans'}}>{status}</Text>
   </TouchableOpacity>
 );
 
@@ -26,7 +26,7 @@ const SideCategory = () => {
       <View style={{
         elevation: 2, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 3.84
       }}>
-        <Text style={{ fontSize: 12, fontWeight: '400', textAlign: 'center' }}>Categories</Text>
+        <Text style={{ fontSize: 12, fontWeight: '400', textAlign: 'center' ,fontFamily:'DMSans'}}>Categories</Text>
         <ScrollView>
           {titles.map((title, index) => (
             <Card

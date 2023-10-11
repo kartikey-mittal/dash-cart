@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
     return (
         <View style={{ width: '50%', height: '54vh', padding: 6, borderColor: '#d9d9d9', borderWidth: 0.4, backgroundColor: '#fff', }}>
             <Image source={{ uri: product.image }} style={{ width: '100%', height: width * 0.4 }} resizeMode="cover" />
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{product.name}</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' ,fontFamily:'DMSans'}}>{product.name}</Text>
             {
                 product.weights.length > 1 ? (
                     <Picker
@@ -29,7 +29,7 @@ const ProductCard = ({ product }) => {
             }
             <Text>{product.sellingPrice}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ textDecorationLine: 'line-through' }}>MRP: {product.price}</Text>
+                <Text style={{ textDecorationLine: 'line-through' ,fontFamily:'DMSans'}}>MRP: {product.price}</Text>
                 <TouchableOpacity style={{ backgroundColor: '#ddd', padding: 10, borderRadius: 8 }}>
                     <Text>ADD</Text>
                 </TouchableOpacity>
