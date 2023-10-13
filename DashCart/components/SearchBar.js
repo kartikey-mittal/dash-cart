@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actu
 const SearchBar = () => {
     return (
         <View style={{ backgroundColor: '#0a5098', padding: 15, borderBottomLeftRadius: 30, borderBottomRightRadius: 30 }}>
-            <Text style={{ color: 'white', fontSize: 15,fontFamily:'DMSans' }}>Welcome, 👋 </Text>
-            <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold',fontFamily:'DMSans' }}>Kartikey</Text>
+            <Text style={{ color: 'white', fontSize: 15 }}>Welcome, 👋 </Text>
+            <Text style={{ color: 'white', fontSize: 25, fontWeight: 'bold' }}>Kartikey</Text>
 
             <View style={{ flexDirection: 'row', backgroundColor: 'white', borderRadius: 50, padding: 10, marginTop: 10 }}>
                 <Icon name="search" size={20} color="black" />

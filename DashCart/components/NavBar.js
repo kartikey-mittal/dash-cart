@@ -8,7 +8,7 @@ const NavBar = () => {
             <TouchableOpacity style={{ backgroundColor: 'white', borderRadius: 50, padding: 10, marginTop: 5 }}>
                 <Icon name="menu" size={30} color="black" />
             </TouchableOpacity>
-            <Text style={{ fontSize: 15, color: 'white',fontFamily:'DMSans' }}>A-1401</Text>
+            <Text style={{ fontSize: 15, color: 'white' }}>A-1401</Text>
             <TouchableOpacity>
                 <Icon name="chevron-down-outline" size={20} color="white" />
             </TouchableOpacity>

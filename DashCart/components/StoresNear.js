@@ -18,8 +18,8 @@ const StoresNear = () => {
 
 
             <View style={{ height: 1, width: 77, backgroundColor: 'gray', marginTop: 10, marginLeft: 5 }} />
-            <Text style={{ fontSize: 20, fontWeight: '500', marginLeft: 5, marginTop: 5 ,fontFamily:'DMSans'}}>Stores Near Me</Text>
-            <Text style={{ fontSize: 16, marginLeft: 5 ,fontFamily:'DMSans'}}>Explore stores near your area</Text>
+            <Text style={{ fontSize: 20, fontWeight: '500', marginLeft: 5, marginTop: 5 }}>Stores Near Me</Text>
+            <Text style={{ fontSize: 16, marginLeft: 5 }}>Explore stores near your area</Text>
             <ScrollView>
 
                 {

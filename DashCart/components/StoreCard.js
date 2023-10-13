@@ -28,9 +28,9 @@ const StoreCard = ({ shopName, shopType, shopAddress }) => {
             }}>
             <View style={{ backgroundColor: '#e6e6e6', width: 79, height: 75, borderRadius: 5, marginLeft: 10 }} />
             <View style={{ marginLeft: 10 }}>
-                <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 10 ,fontFamily:'DMSans'}}>{shopName}</Text>
-                <Text style={{ fontSize: 16, marginLeft: 10 ,fontFamily:'DMSans'}}>{shopType}</Text>
-                <Text style={{ fontSize: 14, marginLeft: 10 ,fontFamily:'DMSans'}}>{shopAddress}</Text>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 10 }}>{shopName}</Text>
+                <Text style={{ fontSize: 16, marginLeft: 10 }}>{shopType}</Text>
+                <Text style={{ fontSize: 14, marginLeft: 10 }}>{shopAddress}</Text>
             </View>
             <View style={{ flex: 1 }} />
             <View style={{
