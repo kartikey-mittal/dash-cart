@@ -16,7 +16,7 @@ const App = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="StoreScreen" component={StoreScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
-        {/* TEST SCREEN ↓↓↓↓↓↓ */}
+        {/* -------- test screen below -------------*/}
         <Stack.Screen name="TestScreen" component={TestScreen} />
 
 
