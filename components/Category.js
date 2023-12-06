@@ -5,7 +5,8 @@ const CategoryComponent = () => {
     return (
         <View>
             <Text style={{ fontSize: 20, paddingLeft: 5, paddingTop: 5 }}>Shops by Category</Text>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            
+            
                 <View style={{ flexDirection: 'column' }}>
                     {[1, 2].map((row) => (
                         <View key={row} style={{ flexDirection: 'row' }}>
@@ -31,7 +32,7 @@ const CategoryComponent = () => {
                         </View>
                     ))}
                 </View>
-            </ScrollView>
+            <ScrollView/>
         </View>
     );
 };

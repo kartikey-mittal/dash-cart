@@ -6,15 +6,23 @@ import { SafeAreaView, StatusBar } from 'react-native';
 import CategoryComponent from '../components/Category';
 import StoresNear from '../components/StoresNear';
 import StoreCard from '../components/StoreCard';
+import Category1 from '../components/Category1';
+import { ScrollView } from 'react-native';
+
+
 
 const HomeScreen = () => {
     return (
         <SafeAreaView style={{ flex: 1, }}>
-            <StatusBar backgroundColor="#0a5098" barStyle="light-content" />
+            <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
             <NavBar />
             <SearchBar />
-            <CategoryComponent />
+            <ScrollView style={{backgroundColor:'white'}}>
+           
+            <Category1/>
             <StoresNear />
+            </ScrollView>
+
 
 
             {/* Rest of your screen components go here */}
