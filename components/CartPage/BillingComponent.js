@@ -10,8 +10,8 @@ const BillingComponent = ({ cart }) => {
     const deliveryFee = billAmount >= 500 ? 'FREE' : '$10';
 
     return (
-        <View style={{ paddingLeft: 50, paddingRight: 50, backgroundColor: '#0a5098' }}>
-            <Text style={{ fontSize: 32, fontWeight: 'bold', color: 'white' }}>Cart</Text>
+        <View style={{ paddingLeft: 50, paddingRight: 50, backgroundColor: '#EB8633' }}>
+            {/* <Text style={{ fontSize: 32, fontWeight: 'bold', color: 'white' }}>Cart</Text> */}
             <Text style={{ fontSize: 15, fontWeight: '500', color: 'white' }}>3 items</Text>
             <View style={{ height: 1, width: '100%', backgroundColor: 'grey', marginTop: 10, marginLeft: 5 }} />
 
