@@ -1,12 +1,15 @@
-import React from 'react';
+import React , { useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actual icon component
+import { MenuContext } from './MenuContext';
 
 const NavBar = () => {
+  const { toggleMenu } = useContext(MenuContext);
+
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1, backgroundColor: '#EB8633',height:'60px' }}>
   <TouchableOpacity style={{ backgroundColor: '#fff', borderRadius: 50, padding: 10, margin: 5 }}>
-    <Icon name="menu" size={25} color="#EB8633" />
+    <Icon name="menu" size={25} color="#EB8633"onPress={toggleMenu} />
   </TouchableOpacity>
   
   <TouchableOpacity style={{ flexDirection: 'row', flexGrow:2 }} >

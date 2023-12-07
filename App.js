@@ -9,12 +9,17 @@ import LoginScreen from './screens/LoginScreen';
 import Delivery from './LoginPages/Screens/Delivery';
 import Delivery2 from './LoginPages/Screens/Delivery2';
 
+
+
+
+
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
+
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Delivery2" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="StoreScreen" component={StoreScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />

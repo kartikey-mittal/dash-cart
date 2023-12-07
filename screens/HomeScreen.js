@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext }  from 'react';
 import { View } from 'react-native';
 import NavBar from '../components/NavBar';
 import SearchBar from '../components/SearchBar';
@@ -10,11 +10,20 @@ import Category1 from '../components/Category1';
 import { ScrollView } from 'react-native';
 
 
+import SideMenu from '../components/SideMenu';
+import { MenuProvider } from '../components/MenuContext';
+import { TouchableWithoutFeedback } from 'react-native';
+
 
 const HomeScreen = () => {
+    
     return (
         <SafeAreaView style={{ flex: 1, }}>
             <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
+            <MenuProvider>
+            
+                <SideMenu/>
+                
             <NavBar />
             <SearchBar />
             <ScrollView style={{backgroundColor:'white'}}>
@@ -22,7 +31,8 @@ const HomeScreen = () => {
             <Category1/>
             <StoresNear />
             </ScrollView>
-
+            
+            </MenuProvider>
 
 
             {/* Rest of your screen components go here */}
