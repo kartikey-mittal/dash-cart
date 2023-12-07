@@ -6,19 +6,24 @@ import StoreScreen from './screens/StoreScreen';
 import CartScreen from './screens/CartScreen';
 import TestScreen from './screens/TestScreen';
 import LoginScreen from './screens/LoginScreen';
+import Delivery from './LoginPages/Screens/Delivery';
+import Delivery2 from './LoginPages/Screens/Delivery2';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="CartScreen" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Delivery2" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="StoreScreen" component={StoreScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         {/* -------- test screen below -------------*/}
         <Stack.Screen name="TestScreen" component={TestScreen} />
+        <Stack.Screen name="Delivery" component={Delivery} />
+        <Stack.Screen name="Delivery2" component={Delivery2} />
+
 
 
 {/* test screen above */}

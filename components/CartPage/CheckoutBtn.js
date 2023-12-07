@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actu
 const { width, height } = Dimensions.get('window');
 
 const CheckoutButton = ({ total }) => (
-    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 60, backgroundColor: 'yellow', paddingHorizontal: 20, position: 'absolute', bottom: 0, width:'90%',borderColor:'#EB8633',borderWidth:2,borderRadius:15 ,margin:10,marginRight:10,alignSelf:'center'}}>
+    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 60, backgroundColor: 'white', paddingHorizontal: 20, position: 'absolute', bottom: 0, width:'98%',borderColor:'#EB8633',borderWidth:2,borderRadius:15 ,margin:5,marginRight:10,alignSelf:'center'}}>
         <Text style={{ fontSize: 20, color: '#3388CB' }}>Confirm
         </Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
