@@ -7,6 +7,7 @@ import OrderNavBar from '../components/OrderPage/OrderNavBar';
 import OrderDetails from '../components/OrderPage/OrderDetails';
 
 import ProgressBar from '../components/OrderPage/ProgessBar';
+import MyOrderCard from '../components/OrderPage/MyOrderCard';
 
 
 
@@ -24,7 +25,7 @@ const OrderScreen = () => {
             <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
 
 
-            <OrderNavBar />
+            <OrderNavBar title="Order Details" />
 
 
             {/*------------TAB BAR ⬇️⬇️⬇️⬇️ ------------------- */}
@@ -46,7 +47,8 @@ const OrderScreen = () => {
             {/*------------TAB BAR⬆️⬆️⬆️ ------------------- */}
             <ProgressBar />
 
-            <OrderDetails />
+            <OrderDetails /> 
+
 
 
         </SafeAreaView>

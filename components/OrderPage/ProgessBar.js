@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const ProgressBar = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
 
   const startAnimation = () => {
     setStep(step + 1);

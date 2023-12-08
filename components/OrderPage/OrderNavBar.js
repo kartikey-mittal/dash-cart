@@ -4,14 +4,14 @@ import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actu
 
 
 
-const OrderNavBar = () => {
+const OrderNavBar = ({title}) => {
     return (
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10, backgroundColor: '#EB8633',height:60 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <TouchableOpacity onPress={() => { }}>
                     <Icon name="chevron-back-outline" size={25} color="white" />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20, color: 'white', marginLeft: 10 }}> Order Details</Text>
+                <Text style={{ fontSize: 20, color: 'white', marginLeft: 10 }}>{title}</Text>
             </View>
             <View style={{ flexDirection: 'row' ,alignItems:'center'}}>
                 <TouchableOpacity onPress={() => { }}>
