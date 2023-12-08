@@ -16,13 +16,13 @@ const { width } = Dimensions.get('window');
 const items = [
     {
       title: 'Chocolate',
-      price: 'Rs 40/',
+      price: 'Rs 40',
       discountPrice: 'Rs 50',
       image: 'https://www.freepngimg.com/thumb/grocery/53973-6-grocery-free-hq-image.png',
     },
     {
       title: 'Candy',
-      price: 'Rs 20/',
+      price: 'Rs 20',
       discountPrice: 'Rs 25',
       image: 'https://www.freepngimg.com/thumb/grocery/53973-6-grocery-free-hq-image.png',
     },

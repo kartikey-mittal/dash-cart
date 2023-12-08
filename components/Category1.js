@@ -3,9 +3,9 @@ import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const Category1 = () => {
   const imageUrls = [
-    'https://www.freepngimg.com/thumb/grocery/53973-6-grocery-free-hq-image.png',
-    'https://www.freepngimg.com/thumb/grocery/53973-6-grocery-free-hq-image.png',
-    'https://www.freepngimg.com/thumb/grocery/53973-6-grocery-free-hq-image.png',
+    'https://th.bing.com/th/id/OIG..fuOKiJrxyjhidoGc30u?pid=ImgGn',
+    'https://img.freepik.com/free-vector/different-stationery-items-blue-plastic-glass-composition-red-circle-white-background-realistic-vector-illustration_1284-19882.jpg',
+    'https://img.freepik.com/premium-vector/medicine-pharmacy_131590-145.jpg',
     'https://www.freepngimg.com/thumb/grocery/53973-6-grocery-free-hq-image.png',
     
     // Add more image URLs as needed

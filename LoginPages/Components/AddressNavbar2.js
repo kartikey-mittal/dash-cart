@@ -17,7 +17,7 @@ const AddressNavBar2 = () => {
       </TouchableOpacity>
 
       <TouchableOpacity style={{ flexDirection: 'row', flexGrow: 2 }} >
-        <Text style={{ fontSize: 15, color: 'black', fontWeight: '800', }}>French Apartments</Text>
+        <Text style={{ fontSize: 15, color: 'black', fontWeight: '800', }}>Singh Colony,Rudrapur</Text>
 
       </TouchableOpacity>
 

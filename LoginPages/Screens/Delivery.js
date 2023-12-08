@@ -14,7 +14,7 @@ const Delivery = () => {
             <StatusBar backgroundColor="white" barStyle="dark-content" />
             
 <AddressNavBar/>
-<AddressNavBar2/>
+
 
 
             {/* Rest of your screen components go here */}

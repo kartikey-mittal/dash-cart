@@ -6,8 +6,8 @@ const BillingComponent = ({ cart }) => {
     // const mrp = cart.reduce((total, item) => total + item.mrp, 0);
     // const billAmount = cart.reduce((total, item) => total + item.price, 0);
     const mrp = 50;
-    const billAmount = 25;
-    const deliveryFee = billAmount >= 500 ? 'FREE' : '$10';
+    const billAmount = 50;
+    const deliveryFee = billAmount >= 500 ? 'FREE' : 'FREE';
 
     return (
         <View style={{ paddingLeft: 50, paddingRight: 50, backgroundColor: '#EB8633' }}>
@@ -17,7 +17,7 @@ const BillingComponent = ({ cart }) => {
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, color: 'white', }}>
                 <Text style={{ color: 'white' }}>M.R.P. Total</Text>
-                <Text style={{ color: 'white' }}>{`$${mrp}`}</Text>
+                <Text style={{ color: 'white' }}>{`₹${mrp}`}</Text>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
                 <Text style={{ color: 'white' }}>Delivery Fee</Text>
@@ -25,7 +25,7 @@ const BillingComponent = ({ cart }) => {
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 7, marginBottom: 3 }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>Bill Amount</Text>
-                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#20f495' }}>{`$${billAmount}`}</Text>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#20f495' }}>{`₹${billAmount}`}</Text>
             </View>
         </View >
 
