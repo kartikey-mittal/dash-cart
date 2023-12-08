@@ -35,7 +35,7 @@ const SideMenu = () => {
   useEffect(() => {
     Animated.timing(animateSideMenu, {
       toValue: isOpen ? 0 : -window.width,
-      duration: 500,
+      duration: 300,
       useNativeDriver: false,
     }).start();
   }, [isOpen]);

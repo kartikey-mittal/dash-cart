@@ -26,7 +26,7 @@ const HomeScreen = () => {
                 
             <NavBar />
             <SearchBar />
-            <ScrollView style={{backgroundColor:'white'}}>
+            <ScrollView style={{backgroundColor:'#f2f2f2'}}>
            
             <Category1/>
             <StoresNear />

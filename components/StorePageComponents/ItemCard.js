@@ -44,12 +44,12 @@ const ItemCard = ({ title, price, discountPrice, image }) => {
                 />
                 </View>
                 <View style={{ flex: 1, marginLeft: 10 }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{title}</Text>
+                    <Text style={{ fontSize: 15, fontWeight: '500' }}>{title}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, color: 'black' }}>{price}/</Text>
+                        <Text style={{ fontSize: 14, color: 'black' }}>{price}/</Text>
                         <Text
                             style={{
-                                fontSize: 16,
+                                fontSize: 13,
                                 color: '#a9a9a9',
                                 textDecorationLine: 'line-through',
                                 marginLeft: 5,

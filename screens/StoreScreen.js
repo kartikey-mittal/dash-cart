@@ -32,8 +32,9 @@ const items = [
 const StoreScreen = () => {
     // const [selectedCategory, setSelectedCategory] = useState(null);
     return (
-        <SafeAreaView style={{ flex: 1,backgroundColor:'white' }}>
+        <SafeAreaView style={{ flex: 1,backgroundColor:'#f2f2f2' }}>
             <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
+            
             <NavBarStore storeName="Bigbasket" />
             <SearchBarStore/>
             <StoreCategory/>

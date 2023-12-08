@@ -9,6 +9,7 @@ import LoginScreen from './screens/LoginScreen';
 import Delivery from './LoginPages/Screens/Delivery';
 import Delivery2 from './LoginPages/Screens/Delivery2';
 
+import OrderScreen from './screens/OrderScreen';
 
 
 
@@ -19,7 +20,7 @@ const App = () => {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="OrderScreen" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="StoreScreen" component={StoreScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
@@ -28,7 +29,7 @@ const App = () => {
         <Stack.Screen name="TestScreen" component={TestScreen} />
         <Stack.Screen name="Delivery" component={Delivery} />
         <Stack.Screen name="Delivery2" component={Delivery2} />
-
+        <Stack.Screen name="OrderScreen" component={OrderScreen} />
 
 
 {/* test screen above */}
