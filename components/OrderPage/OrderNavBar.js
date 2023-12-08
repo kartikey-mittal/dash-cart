@@ -13,12 +13,12 @@ const OrderNavBar = () => {
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20, color: 'white', marginLeft: 10 }}> Order Details</Text>
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row' ,alignItems:'center'}}>
                 <TouchableOpacity onPress={() => { }}>
-                    <Icon name="search" size={25} color="white" style={{ margin: 5 }} />
+                    <Icon name="logo-whatsapp" size={25} color="white" style={{ margin: 5 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { }}>
-                    <Icon name="cart" size={25} color="white" style={{ margin: 5 }} />
+                    <Icon name="help-circle-outline" size={32} color="white" style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
         </View>
