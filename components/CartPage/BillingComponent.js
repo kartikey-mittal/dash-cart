@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actual icon component
 
-const BillingComponent = ({ cart }) => {
+const BillingComponent = ({ cart,totalBillAmount }) => {
     // const mrp = cart.reduce((total, item) => total + item.mrp, 0);
     // const billAmount = cart.reduce((total, item) => total + item.price, 0);
     const mrp = 50;
@@ -17,7 +17,7 @@ const BillingComponent = ({ cart }) => {
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, color: 'white', }}>
                 <Text style={{ color: 'white' }}>M.R.P. Total</Text>
-                <Text style={{ color: 'white' }}>{`₹${mrp}`}</Text>
+                <Text style={{ color: 'white' }}>{`₹${totalBillAmount}`}</Text>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
                 <Text style={{ color: 'white' }}>Delivery Fee</Text>
@@ -25,7 +25,7 @@ const BillingComponent = ({ cart }) => {
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 7, marginBottom: 3 }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>Bill Amount</Text>
-                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#20f495' }}>{`₹${billAmount}`}</Text>
+                <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#20f495' }}>{`₹${totalBillAmount}`}</Text>
             </View>
         </View >
 

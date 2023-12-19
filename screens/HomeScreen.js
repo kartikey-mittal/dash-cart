@@ -7,8 +7,9 @@ import CategoryComponent from '../components/Category';
 import StoresNear from '../components/StoresNear';
 import StoreCard from '../components/StoreCard';
 import Category1 from '../components/Category1';
-import { ScrollView } from 'react-native';
-
+import { ScrollView ,Alert} from 'react-native';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import SideMenu from '../components/SideMenu';
 import { MenuProvider } from '../components/MenuContext';
@@ -16,6 +17,16 @@ import { TouchableWithoutFeedback } from 'react-native';
 
 
 const HomeScreen = () => {
+
+    const loginData = useSelector((state) => state.loginReducer);
+
+    useEffect(() => {
+      // Display an alert with the data from the loginReducer
+      Alert.alert(
+        'Login Data',
+        `Mobile Number: ${loginData.mobileNumber}\nSociety: ${loginData.society.societyName}\nBlock No: ${loginData.blockNo}\nFlat No: ${loginData.flatNo}`,
+      );
+    }, [loginData]);
     
     return (
         <SafeAreaView style={{ flex: 1, }}>
