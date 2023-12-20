@@ -13,18 +13,21 @@ import CityScreen from './LoginPages/Screens/CityScreen';
 import OrderScreen from './screens/OrderScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import Deliveryd from './LoginPages/Screens/Deliveryd';
+import CheckoutButton from './components/CartPage/CheckoutBtn';
+import Orderconfirmed from './components/CartPage/Orderconfirmed';
 
 
 
 
 const Stack = createStackNavigator();
-
 const AppNavigator = () => {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="StoreScreen" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="CheckoutBtn" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Orderconfirmed" component={Orderconfirmed} />
+        <Stack.Screen name="CheckoutBtn" component={CheckoutButton} />
         <Stack.Screen name="StoreScreen" component={StoreScreen} />
         <Stack.Screen name="CartScreen" component={CartScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
