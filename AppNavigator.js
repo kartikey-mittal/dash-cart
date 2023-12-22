@@ -15,7 +15,7 @@ import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import Deliveryd from './LoginPages/Screens/Deliveryd';
 import CheckoutButton from './components/CartPage/CheckoutBtn';
 import Orderconfirmed from './components/CartPage/Orderconfirmed';
-
+import NameScreen from './LoginPages/Screens/NameScreen';
 
 
 
@@ -24,7 +24,7 @@ const AppNavigator = () => {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="CheckoutBtn" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="LoginScreen" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Orderconfirmed" component={Orderconfirmed} />
         <Stack.Screen name="CheckoutBtn" component={CheckoutButton} />
@@ -39,6 +39,7 @@ const AppNavigator = () => {
         <Stack.Screen name="OrderHistoryScreen" component={OrderHistoryScreen} />
         <Stack.Screen name="CityScreen" component={CityScreen} />
         <Stack.Screen name="Deliveryd" component={Deliveryd} />
+        <Stack.Screen name="NameScreen" component={NameScreen} />
 
 {/* test screen above */}
 

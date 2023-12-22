@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actu
 
 const window = Dimensions.get('window');
 
-const SideMenu = () => {
+const SideMenu = ({username}) => {
   const { isOpen, toggleMenu } = useContext(MenuContext);
   const animateSideMenu = useRef(new Animated.Value(-window.width)).current;
 
@@ -57,14 +57,14 @@ const SideMenu = () => {
       <Animated.View style={{ position: 'absolute', left: animateSideMenu, top: 0, bottom: 0, width: window.width * 0.7, backgroundColor: '#fff', padding: 0, zIndex: 1, shadowColor: "#000", shadowOffset: { width: -10, height: 0 }, shadowOpacity: 0.58, shadowRadius: 16.00, elevation: 24,flex:1 }} {...panResponder.panHandlers}>
         <TouchableWithoutFeedback onPress={() => { }}>
           <View>
-            <View style={{ backgroundColor: '#EB8633' }}>
+            <View style={{ backgroundColor: '#EB8633',flexDirection:'row-reverse' }}>
               <TouchableOpacity style={{ backgroundColor: '#fff', borderRadius: 50, padding: 10, margin: 5, width: 50 }} onPress={() => handleTextClick('Back')}>
-                <Icon name="chevron-back" size={25} color="#EB8633" />
+                <Icon name="close" size={25} color="#EB8633" />
               </TouchableOpacity>
             </View>
             <View style={{ backgroundColor: '#EB8633', flexGrow: 1 }}>
               <Text style={{ color: 'white', fontSize: 20, fontWeight: 300, marginLeft: 5, marginTop: 15 }}>Welcome</Text>
-              <Text style={{ color: 'white', fontSize: 25, fontWeight: 400, marginLeft: 5, elevation: 5 }}>Kartikey</Text>
+              <Text style={{ color: 'white', fontSize: 25, fontWeight: 400, marginLeft: 5, elevation: 5 }}>{username}</Text>
             </View>
 
 

@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
                 dispatch(setMobileNumber(phoneNumber));
                 Alert.alert("Submitted", `+91 ${phoneNumber}`);
            
-                navigation.navigate('CityScreen'); 
+                navigation.navigate('NameScreen'); 
 
 
         };

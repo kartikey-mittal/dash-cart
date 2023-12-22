@@ -4,20 +4,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/actions/actions';
 
-const ItemCard = ({ id, title, price, discountPrice, image }) => {
+const ItemCard = ({ id, title, price, discountPrice, image ,weight}) => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('500gms');
   const [quantity, setQuantity] = useState(0);
-
-  const handleDropdownClick = () => setShowDropdown(!showDropdown);
-
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setShowDropdown(false);
-  };
 
   const handleIncrement = () => setQuantity((prevQuantity) => prevQuantity + 1);
 
@@ -58,37 +49,10 @@ const ItemCard = ({ id, title, price, discountPrice, image }) => {
           <Text style={{ fontSize: 16, color: 'black', marginTop: 4 }}>{price}/-</Text>
           <Text style={{ fontSize: 13, color: '#a9a9a9', textDecorationLine: 'line-through', marginLeft: 5 }}>{discountPrice}</Text>
         </View>
-        <View style={{ flexDirection: 'row' }}>
-  <TouchableOpacity
-    style={{
-      backgroundColor: '#fff',
-      borderRadius: 5,
-      padding: 10,
-      marginTop: 10,
-      width: 120,
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexDirection: 'row',
-      borderColor: '#989BA4',
-      borderWidth: 1,
-    }}
-    onPress={handleDropdownClick}
-  >
-    <Text style={{ fontSize: 16, color: 'black' }}>{selectedOption}</Text>
-    <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
-  </TouchableOpacity>
-  {showDropdown && (
-    <View style={{ backgroundColor: 'white', borderRadius: 5, padding: 10, marginLeft: 5, zIndex: 1 }}>
-      <TouchableOpacity onPress={() => handleOptionClick('1Kg')} style={styles.dropdownOption}>
-        <Text style={styles.dropdownOptionText}>1Kg</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleOptionClick('2Kg')} style={styles.dropdownOption}>
-        <Text style={styles.dropdownOptionText}>2Kg</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
-
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+     
+          <Text style={{ fontSize: 16, color: 'black',backgroundColor:'#f2f2f2',paddingHorizontal:5}}>{weight}</Text>
+        </View>
         {quantity === 0 ? (
           <TouchableOpacity onPress={handleAddClick} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
             <View style={{ borderRadius: 5, padding: 4, alignItems: 'center', justifyContent: 'center', height: 30, borderColor: '#EB8633', borderWidth: 1, width: 60 }}>
@@ -105,19 +69,4 @@ const ItemCard = ({ id, title, price, discountPrice, image }) => {
   );
 };
 
-const styles = {
-  dropdownOption: {
-    paddingVertical: 3,
-    paddingHorizontal: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  dropdownOptionText: {
-    fontSize: 16,
-    color: 'black',
-  },
-};
-
-
 export default ItemCard;
-

@@ -4,11 +4,10 @@ import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actu
 import { MenuContext } from './MenuContext';
 import { useSelector } from 'react-redux';
 
-const NavBar = () => {
+const NavBar = ({ cityName }) => {
   const { toggleMenu } = useContext(MenuContext);
 
-  const cityName = useSelector((state) => state.loginReducer.city.cityName
-  )
+  
 
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1, backgroundColor: '#EB8633',height:'60px' }}>

@@ -12,7 +12,7 @@ const NavBarStore = ({ storeName }) => {
         <TouchableOpacity onPress={() => {}}>
           <Icon name="chevron-back-outline" size={25} color="white" />
         </TouchableOpacity>
-        <Text style={{ fontSize: 20, color: 'white', marginLeft: 10 }}>{storeName}</Text>
+        <Text style={{ fontSize: 20, color: 'white', marginLeft: 10, }}>{storeName}</Text>
       </View>
       <View style={{ flexDirection: 'row' }}>
         <TouchableOpacity onPress={() => {}}>

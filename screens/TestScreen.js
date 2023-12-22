@@ -1,47 +1,69 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated, Dimensions, TouchableWithoutFeedback, SafeAreaView } from 'react-native';
-
-import { StatusBar } from 'expo-status-bar';
-
-import HomeScreen from './HomeScreen';
-
-const window = Dimensions.get('window');
+import React, { useState, useEffect } from 'react';
+import { View, Text, SafeAreaView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TestScreen = () => {
-    const [isOpen, setIsOpen] = useState(true);
-  const animateSideMenu = useRef(new Animated.Value(-window.width)).current;
-
-  const toggleMenu = () => {
-    Animated.timing(animateSideMenu, {
-      toValue: isOpen ? -window.width : 0,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-
-    setIsOpen(!isOpen);
+  // Dummy data
+  const user_data = {
+    'User-City': 'Dadri',
+    'User-CityCode': '12345',
+    'User-Phone': '9876543210',
+    'User-SocietyName': 'Green Park',
+    'User-SocietyCode': 'GP123',
+    'User-SocietyBlock': 'A',
+    'User-SocietyFlat': '101',
+    'User-Name': 'John Doe',
+    'User-Email': 'johndoe@example.com',
   };
 
-    return (
-        <SafeAreaView style={{ flex: 1, }}>
-            <StatusBar backgroundColor="white" barStyle="light-content" />
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F5FCFF' }}>
-      <TouchableOpacity onPress={toggleMenu} style={{ backgroundColor: '#4CAF50', padding: 10, borderRadius: 5 }}>
-        <Text style={{ color: '#FFFFFF', fontSize: 16 }}>{isOpen ? 'Close Menu' : 'Open Menu'}</Text>
-      </TouchableOpacity>
-      <TouchableWithoutFeedback onPress={toggleMenu}>
-        <Animated.View style={{ position: 'absolute', left: animateSideMenu, top: 0, bottom: 0, width: window.width * 0.7, backgroundColor: 'yellow', padding: 20 }}>
-          <Text style={{ marginBottom: 10, fontSize: 18 }}>Home</Text>
-          <Text style={{ marginBottom: 10, fontSize: 18 }}>Profile</Text>
-          <Text style={{ marginBottom: 10, fontSize: 18 }}>Settings</Text>
-        </Animated.View>
-      </TouchableWithoutFeedback>
-    </View>
+  // Save initial data to AsyncStorage
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('UserData', jsonValue)
+    } catch (e) {
+      // saving error
+      console.log(e);
+    }
+  }
 
+  // Merge new data with existing data
+  const mergeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.mergeItem('UserData', jsonValue)
+    } catch (e) {
+      // saving error
+      console.log(e);
+    }
+  }
 
-        </SafeAreaView>
-    );
+  // Fetch specific field
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('UserData')
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch(e) {
+      // error reading value
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    storeData(user_data);
+    // mergeData({'User-Name': 'New Name'}); // This will only update 'User-Name' field
+
+    // Fetch specific field
+    getData().then(data => {
+      console.log(data['User-Name']); // This will fetch 'User-Name' field
+    });
+  }, []);
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+  
+    </SafeAreaView>
+  );
 }
-
-
 
 export default TestScreen;

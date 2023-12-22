@@ -1,7 +1,25 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView,Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const StoreCard = ({ shopName, shopType, shopAddress }) => {
+import { useNavigation } from '@react-navigation/native';
+
+const StoreCard = ({ shopName, shopType, shopAddress,shopItems ,shopId}) => {
+    console.log('shop id :  ' + shopId)
+    const navigation = useNavigation();
+
+    const handlePress = async () => {
+        try {
+          // Save the shopId to AsyncStorage
+          await AsyncStorage.setItem('storeid', shopId);
+    
+          // Navigate to StoreScreen with the shopId as a prop
+          navigation.navigate('StoreScreen', { storeid: shopId,storename:shopName });
+        } catch (error) {
+          console.error('Error saving shopId to AsyncStorage:', error);
+        }
+      };
+
     return (
 
         <TouchableOpacity style={{
@@ -23,9 +41,7 @@ const StoreCard = ({ shopName, shopType, shopAddress }) => {
 
 
         }}
-            onPress={() => {
-                // Handle your onPress event here
-            }}>
+            onPress={ handlePress}>
             <View style={{ backgroundColor: '#e6e6e6', width: 79, height: 75, borderRadius: 5, marginLeft: 10 }} />
             <View style={{ marginLeft: 10 }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold', marginLeft: 10 }}>{shopName}</Text>

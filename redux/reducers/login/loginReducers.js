@@ -7,6 +7,8 @@ const initialState = {
     cityName: '',
     cityId: '',
   },
+  userName: '', // New addition
+  userEmail: '', // New addition
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -44,6 +46,18 @@ const loginReducer = (state = initialState, action) => {
           cityName: action.payload.cityName,
           cityId: action.payload.cityId,
         },
+      };
+
+    case 'SET_USER_NAME':
+      return {
+        ...state,
+        userName: action.payload,
+      };
+
+    case 'SET_USER_EMAIL':
+      return {
+        ...state,
+        userEmail: action.payload,
       };
 
     default:

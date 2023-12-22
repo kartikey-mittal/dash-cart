@@ -9,21 +9,22 @@ client.setEndpoint('https://cloud.appwrite.io/v1');
 client.setProject('65773c8581b895f83d40');
 const databases = new Databases(client);
 
-const StoresNear = () => {
+const StoresNear = ({societyId}) => {
   const [shops, setShops] = useState([]);
 
   // Fetch the societyId from the Redux store
-  const id = useSelector((state) => state.loginReducer.society);
+  
 
   useEffect(() => {
     const fetchStores = async () => {
       try {
         console.log('Fetching Stores');
         const response = await databases.listDocuments('data-level-1', 'StoresDB', [
-          Query.select(['Store-Name', 'Store-OwnerName', 'Store-City']),
-          Query.search('Store-Housing-Code', id.societyId) // Use the societyId from Redux
+          
+          Query.search('Store-Housing-Code', societyId) // Use the societyId from Redux
           // Add other queries as needed
         ]);
+       
 
         if (response?.documents) {
           console.log('Stores response:', response);
@@ -35,10 +36,10 @@ const StoresNear = () => {
     };
 
     fetchStores();
-  }, [id]); // Include societyId in the dependency array
+  }, [societyId]); // Include societyId in the dependency array
 
   useEffect(() => {
-    console.log('Shops:', shops);
+    console.log('Shops:', shops.map(shop => shop['Store-Items']).flat());
   }, [shops]);
 
   return (
@@ -53,6 +54,8 @@ const StoresNear = () => {
           shopName={shop['Store-Name']}
           shopType={shop['Store-OwnerName']}
           shopAddress={shop['Store-City']}
+          shopItems={shops.map(shop => shop['Store-Items']).flat()}
+          shopId={shop['Store-ID']}
         />
       ))}
     </ScrollView>

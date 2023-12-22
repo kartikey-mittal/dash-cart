@@ -1,67 +1,74 @@
 // StoreScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, ActivityIndicator, Text } from 'react-native';
-import { SafeAreaView, StatusBar, Dimensions } from 'react-native';
-import { Client, Databases } from 'appwrite';
+import { View, FlatList, ActivityIndicator, Text, SafeAreaView, StatusBar } from 'react-native';
+import { Client, Databases, Query } from 'appwrite'; // Import the Query module
 import NavBarStore from '../components/StorePageComponents/NavBarStore';
 import SearchBarStore from '../components/StorePageComponents/SearchBarStore';
 import StoreCategory from '../components/StorePageComponents/StoreCategory';
 import ItemCard from '../components/StorePageComponents/ItemCard';
 
-const { width } = Dimensions.get('window');
-
-const StoreScreen = () => {
+const StoreScreen = ({route}) => {
+  const { storeid ,storename} = route.params;
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(''); // Initialize with an empty string
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [loading, setLoading] = useState(true);
+  console.log(storeid)
 
+  // ----------------------Manually Set the storeid ------------------------
+  // const [storeid, setStoreid] = useState('');
+
+  // useEffect(() => {
+  //   setStoreid('020');
+  // }, []); // Run this once on mount to set the initial value of storeid
+  
+  // ------------------------------------------------
   useEffect(() => {
-    // Initialize Appwrite client
-    const client = new Client();
-    client.setEndpoint('https://cloud.appwrite.io/v1');
-    client.setProject('65773c8581b895f83d40');
+    const fetchData = async () => {
+      const client = new Client();
+      client.setEndpoint('https://cloud.appwrite.io/v1');
+      client.setProject('65773c8581b895f83d40');
 
-    // Initialize Databases instance
-    const databases = new Databases(client);
+      const databases = new Databases(client);
+      const collectionId = 'ItemsDB';
 
-    // Replace 'YOUR_COLLECTION_ID' with your actual collection ID
-    const collectionId = 'ProductsDB';
+      try {
+        const response = await databases.listDocuments(
+          'data-level-1',
+          collectionId,
+          [Query.search("SPrice", storeid)]
+        );
 
-    // Fetch data from Appwrite collection
-    databases
-      .listDocuments('data-level-1', collectionId)
-      .then((response) => {
+        console.log(response);
         setItems(response.documents);
 
-        // Extract unique categories from the items
-        const uniqueCategories = Array.from(new Set(response.documents.map((item) => item['Product-Category'])));
-
-        // Create an array of category objects with name and image URL
+        const uniqueCategories = Array.from(new Set(response.documents.map((item) => item['Item-Category'])));
         const categoryData = uniqueCategories.map((category) => ({
           name: category,
-          image: response.documents.find((item) => item['Product-Category'] === category)['Category-URL'], // Assuming 'Category-URL' is the attribute for category image
+          image: response.documents.find((item) => item['Item-Category'] === category)['Category-Image'],
         }));
 
         setCategories(categoryData);
-        setSelectedCategory(categoryData[0]?.name || ''); // Set the default category name
+        setSelectedCategory(categoryData[0]?.name || '');
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
-      });
-  }, []);
+      }
+    };
 
-  const filteredItems = selectedCategory ? items.filter((item) => item['Product-Category'] === selectedCategory) : items;
+    fetchData();
+  }, [storeid]); // Run this whenever storeid changes
+
+  const filteredItems = selectedCategory ? items.filter((item) => item['Item-Category'] === selectedCategory) : items;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
       <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
-
-      <NavBarStore storeName="Bigbasket" />
+      <NavBarStore storeName={storename} />
       <SearchBarStore />
       <StoreCategory categories={categories} onSelectCategory={setSelectedCategory} />
+      
 
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
@@ -71,15 +78,22 @@ const StoreScreen = () => {
         <FlatList
           data={filteredItems}
           keyExtractor={(item) => item.$id}
-          renderItem={({ item }) => (
-            <ItemCard
-              id={item.$id} // Pass the document ID as a prop
-              title={item['Product-Name']}
-              price={item['Product-SP']}
-              discountPrice={item['Product-MRP']}
-              image={item['Product-Image']}
-            />
-          )}
+          renderItem={({ item }) => {
+            const spriceArray = item['SPrice'].split(',').map(pair => pair.split(':'));
+            const valueForStore = spriceArray.find(pair => pair[0] === storeid);
+            const valueStore = valueForStore ? valueForStore[1] : null;
+
+            return (
+              <ItemCard
+                id={item.$id}
+                title={item['Item-Name']}
+                price={valueStore}
+                discountPrice={item['Item-MRP']}
+                image={item['Item-Image']}
+                weight={item['Item-Weight']}
+              />
+            );
+          }}
         />
       )}
     </SafeAreaView>
