@@ -15,6 +15,7 @@ import SideMenu from '../components/SideMenu';
 import { MenuProvider } from '../components/MenuContext';
 import { TouchableWithoutFeedback } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FontLoader from '../FontLoader';
 
 
 const HomeScreen = () => {
@@ -61,6 +62,7 @@ const HomeScreen = () => {
     }, []);
     // -------------------------------AsyncStorage [UserData] Closed-------------------------
     return (
+      <FontLoader>
         <SafeAreaView style={{ flex: 1, }}>
             <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
             <MenuProvider>
@@ -80,6 +82,7 @@ const HomeScreen = () => {
 
             {/* Rest of your screen components go here */}
         </SafeAreaView>
+        </FontLoader>
     );
 };
 

@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from 'react-native';
 import StoreCard from './StoreCard';
 import { Client, Databases, Query } from 'appwrite';
 import { useSelector } from 'react-redux'; // Import useSelector from react-redux
+import FontLoader from '../FontLoader';
 
 const client = new Client();
 client.setEndpoint('https://cloud.appwrite.io/v1');
@@ -43,10 +44,11 @@ const StoresNear = ({societyId}) => {
   }, [shops]);
 
   return (
+    <FontLoader>
     <ScrollView>
       <View style={{ height: 1, width: 77, backgroundColor: 'gray', marginTop: 10, marginLeft: 5 }} />
-      <Text style={{ fontSize: 20, fontWeight: '500', marginLeft: 5, marginTop: 5 }}>Stores Near Me</Text>
-      <Text style={{ fontSize: 16, marginLeft: 5 }}>Explore stores near your area</Text>
+      <Text style={{ fontSize: 20, fontWeight: '500', marginLeft: 5, marginTop: 5 ,fontFamily:"DMSans"}}>Stores Near Me</Text>
+      <Text style={{ fontSize: 16, marginLeft: 5 ,fontFamily:"DMSans"}}>Explore stores near your area</Text>
 
       {shops.map((shop, index) => (
         <StoreCard
@@ -59,6 +61,7 @@ const StoresNear = ({societyId}) => {
         />
       ))}
     </ScrollView>
+    </FontLoader>
   );
 };
 

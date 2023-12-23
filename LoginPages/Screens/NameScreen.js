@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserName, setUserEmail } from '../../redux/actions/actions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import FontLoader from '../../FontLoader';
 
 const NameScreen = () => {
     const navigation = useNavigation();
@@ -31,6 +32,7 @@ const NameScreen = () => {
     console.log('UserName from Redux store:', userNameFromStore);
     console.log('UserEmail from Redux store:', userEmailFromStore);
     return (
+        <FontLoader>
         <SafeAreaView style={{ flex: 1 }}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
         <View>
@@ -93,6 +95,7 @@ const NameScreen = () => {
 
         </View>
         </SafeAreaView>
+        </FontLoader>
     );
 };
 

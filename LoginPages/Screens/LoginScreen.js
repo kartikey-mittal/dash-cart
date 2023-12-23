@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setMobileNumber } from "../../redux/actions/actions";
 
 
+
 import {
         View,
         StyleSheet,
@@ -13,6 +14,7 @@ import {
         TextInput,
         Alert
 } from "react-native";
+import FontLoader from '../../FontLoader';
 
 const LoginScreen = ({ navigation }) => {
         const [phoneNumber, setPhoneNumber] = useState("");
@@ -34,6 +36,7 @@ const LoginScreen = ({ navigation }) => {
         };
 
         return (
+                <FontLoader>
                 <View style={styles.full}>
                         <View style={styles.container}>
                                 <Text style={styles.heading}>
@@ -89,6 +92,7 @@ const LoginScreen = ({ navigation }) => {
                                 </TouchableOpacity>
                         </View>
                 </View>
+                </FontLoader>
         );
 };
 
