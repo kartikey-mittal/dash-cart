@@ -46,9 +46,16 @@ const StoresNear = ({societyId}) => {
   return (
     <FontLoader>
     <ScrollView>
+<<<<<<< HEAD
       <View style={{ height: 1, width: 77, backgroundColor: 'gray', marginTop: 10, marginLeft: 5 }} />
       <Text style={{ fontSize: 20, fontWeight: '500', marginLeft: 5, marginTop: 5 ,fontFamily:"DMSans"}}>Stores Near Me</Text>
       <Text style={{ fontSize: 16, marginLeft: 5 ,fontFamily:"DMSans"}}>Explore stores near your area</Text>
+=======
+      
+      <View style={{ height: 1, width: 100, backgroundColor: 'gray', marginTop: 10, marginLeft: 10 }} />
+      <Text style={{ fontSize: 17, fontWeight: '600', marginLeft: 10, marginTop: 5,color:'#074654' }}>Stores near me 🏬</Text>
+      <Text style={{ fontSize: 14, marginLeft: 10,color:'#2C3E50', }}>3 stores delivering around you</Text>
+>>>>>>> b790f6a2edafd4db1d3dbfbeaa21e31407ae0fe1
 
       {shops.map((shop, index) => (
         <StoreCard
@@ -58,8 +65,12 @@ const StoresNear = ({societyId}) => {
           shopAddress={shop['Store-City']}
           shopItems={shops.map(shop => shop['Store-Items']).flat()}
           shopId={shop['Store-ID']}
+          shopTicketSize={shop['Store-TicketSize']}
+          shopCurrentSize={shop['Store-CurrentSize']}
         />
-      ))}
+        
+      )
+      )}
     </ScrollView>
     </FontLoader>
   );

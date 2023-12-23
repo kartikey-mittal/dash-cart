@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../redux/actions/actions';
+import { addToCart, updateCartItemQuantity } from '../../redux/actions/actions';
 
-const ItemCard = ({ id, title, price, discountPrice, image ,weight}) => {
+const ItemCard = ({ id, title, price, discountPrice, image, weight }) => {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
-  const cartItems = useSelector((state) => state.cart);
-  const [quantity, setQuantity] = useState(0);
+  // Find the cart item corresponding to the current ItemCard
+  const cartItem = cartItems.find((item) => item.id === id);
 
-  const handleIncrement = () => setQuantity((prevQuantity) => prevQuantity + 1);
+  const [quantity, setQuantity] = useState(cartItem ? cartItem.quantity : 0);
+
+  useEffect(() => {
+    // Update the local state when the cart item quantity changes
+    setQuantity(cartItem ? cartItem.quantity : 0);
+  }, [cartItem]);
+
+  const handleIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+
+    // Dispatch an action to update the quantity in the cart reducer
+    dispatch(updateCartItemQuantity(id, quantity + 1));
+  };
 
   const handleDecrement = () => {
     if (quantity > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
+
+      // Dispatch an action to update the quantity in the cart reducer
+      dispatch(updateCartItemQuantity(id, quantity - 1));
     } else {
       setQuantity(0);
     }
@@ -40,7 +56,7 @@ const ItemCard = ({ id, title, price, discountPrice, image ,weight}) => {
 
   return (
     <View style={{ flexDirection: 'row', backgroundColor: 'white', borderRadius: 10, padding: 10, marginHorizontal: 10, marginVertical: 5, borderColor: '#989BA4', borderWidth: 0.5 }}>
-      <View style={{ backgroundColor: 'rgba(0, 0, 0, 0)', width: 100, height: 100, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+       <View style={{ backgroundColor: 'rgba(0, 0, 0, 0)', width: 100, height: 100, alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
         <Image source={{ uri: image }} style={{ width: '100%', height: '100%', resizeMode: 'contain' }} />
       </View>
       <View style={{ flex: 1, marginLeft: 25 }}>
@@ -50,21 +66,20 @@ const ItemCard = ({ id, title, price, discountPrice, image ,weight}) => {
           <Text style={{ fontSize: 13, color: '#a9a9a9', textDecorationLine: 'line-through', marginLeft: 5 }}>{discountPrice}</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-     
-          <Text style={{ fontSize: 16, color: 'black',backgroundColor:'#f2f2f2',paddingHorizontal:5}}>{weight}</Text>
+          <Text style={{ fontSize: 16, color: 'black', backgroundColor: '#f2f2f2', paddingHorizontal: 5 }}>{weight}</Text>
         </View>
-        {quantity === 0 ? (
-          <TouchableOpacity onPress={handleAddClick} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-            <View style={{ borderRadius: 5, padding: 4, alignItems: 'center', justifyContent: 'center', height: 30, borderColor: '#EB8633', borderWidth: 1, width: 60 }}>
-              <Text style={{ color: '#EB8633', fontSize: 14 }}>ADD</Text>
-            </View>
-          </TouchableOpacity>
-        ) : (
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 10 }}>
-            {renderCounterButtons()}
+      {quantity === 0 ? (
+        <TouchableOpacity onPress={handleAddClick} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+          <View style={{ borderRadius: 5, padding: 4, alignItems: 'center', justifyContent: 'center', height: 30, borderColor: '#EB8633', borderWidth: 1, width: 60 }}>
+            <Text style={{ color: '#EB8633', fontSize: 14 }}>ADD</Text>
           </View>
-        )}
-      </View>
+        </TouchableOpacity>
+      ) : (
+        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 10 }}>
+          {renderCounterButtons()}
+        </View>
+      )}
+    </View>
     </View>
   );
 };
