@@ -6,7 +6,7 @@ import NavBarStore from '../components/StorePageComponents/NavBarStore';
 import SearchBarStore from '../components/StorePageComponents/SearchBarStore';
 import StoreCategory from '../components/StorePageComponents/StoreCategory';
 import ItemCard from '../components/StorePageComponents/ItemCard';
-
+import PromotionStore from '../components/StorePageComponents/PromotionStore';
 const StoreScreen = ({route}) => {
   const { storeid ,storename} = route.params;
   const [items, setItems] = useState([]);
@@ -67,6 +67,7 @@ const StoreScreen = ({route}) => {
       <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
       <NavBarStore storeName={storename} />
       <SearchBarStore />
+      <PromotionStore/>
       <StoreCategory categories={categories} onSelectCategory={setSelectedCategory} />
       
 

@@ -10,7 +10,9 @@ const FontLoader = ({ children }) => {
   useEffect(() => {
     const loadFont = async () => {
       await Font.loadAsync({
-        'DMSans': require('./assets/fonts/DMSans.ttf')
+        'DMSans': require('./assets/fonts/DMSans.ttf'),
+        'DMSansSB': require('./assets/fonts/DMSans-SemiBold.ttf'),
+        'DMSansB': require('./assets/fonts/DMSans-Bold.ttf'),
         
       });
       setFontLoaded(true);

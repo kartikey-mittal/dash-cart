@@ -2,17 +2,19 @@ import React from 'react';
 import { View, Text, TouchableOpacity,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
+import FontLoader from '../../FontLoader';
 
 const NavBarStore = ({ storeName }) => {
   const navigation = useNavigation(); // Get the navigation object using useNavigation
 
   return (
+    <FontLoader>
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10, backgroundColor: '#EB8633', height: 60 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <TouchableOpacity onPress={() => {}}>
           <Icon name="chevron-back-outline" size={25} color="white" />
         </TouchableOpacity>
-        <Text style={{ fontSize: 20, color: 'white', marginLeft: 10, }}>{storeName}</Text>
+        <Text style={{ fontSize: 16, color: 'white', marginLeft: 10,fontFamily:"DMSansB" }}>{storeName}</Text>
       </View>
       <View style={{ flexDirection: 'row' }}>
         <TouchableOpacity onPress={() => {}}>
@@ -24,7 +26,8 @@ const NavBarStore = ({ storeName }) => {
 
         </TouchableOpacity>
       </View>
-    </View>    
+    </View> 
+    </FontLoader>   
   );
 };
 

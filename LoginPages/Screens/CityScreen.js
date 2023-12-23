@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCityInfo } from '../../redux/actions/actions';
 import { Client, Databases, Query } from 'appwrite';
 import { useNavigation } from '@react-navigation/native';
+import FontLoader from '../../FontLoader';
 
 const client = new Client();
 client.setEndpoint('https://cloud.appwrite.io/v1');
@@ -30,12 +31,14 @@ const CityCard = ({ city }) => {
   };
 
   return (
+    <FontLoader>
     <TouchableOpacity onPress={handleCityPress}>
       <View style={{ width: '100%', backgroundColor: '#fff', padding: 5, borderRadius: 5, shadowColor: '#000', shadowOpacity: 0.3, shadowRadius: 4, elevation: 1, marginTop: 10 }}>
-        <Text style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}>{city.name}</Text>
+        <Text style={{ fontSize: 15, marginBottom: 10,fontFamily:"DMSansSB"}}>{city.name}</Text>
         <Text style={{ fontSize: 14, color: '#888' }}>ID: {city.housingId}</Text>
       </View>
     </TouchableOpacity>
+    </FontLoader>
   );
 };
 
@@ -66,6 +69,7 @@ const CityScreen = () => {
   }, [cityInfo]);
 
   return (
+    <FontLoader>
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
 
@@ -75,7 +79,7 @@ const CityScreen = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={{ flexDirection: 'row', flexGrow: 2 }}>
-          <Text style={{ fontSize: 15, color: 'black', fontWeight: '800' }}>Select City Location</Text>
+          <Text style={{ fontSize: 15, color: 'black', fontWeight: '500' ,fontFamily:"DMSansB"}}>Select City Location</Text>
         </TouchableOpacity>
       </View>
 
@@ -84,6 +88,7 @@ const CityScreen = () => {
       {/* Render City Cards */}
       {cityData.map(city => <CityCard key={city.id} city={city} />)}
     </SafeAreaView>
+    </FontLoader>
   );
 };
 

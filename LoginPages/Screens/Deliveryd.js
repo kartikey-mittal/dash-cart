@@ -32,7 +32,7 @@ const CityCard = ({ city }) => {
   return (
     <TouchableOpacity onPress={handleCityPress}>
       <View style={{ width: '100%', backgroundColor: '#fff', padding: 5, borderRadius: 5, shadowColor: '#000', shadowOpacity: 0.3, shadowRadius: 4, elevation: 1, marginTop: 10 }}>
-        <Text style={{ fontSize: 15, fontWeight: 'bold', marginBottom: 10 }}>{city.name}</Text>
+        <Text style={{ fontSize: 15,  marginBottom: 10,fontFamily:"DMSansSB" }}>{city.name}</Text>
         <Text style={{ fontSize: 14, color: '#888' }}>ID: {city.housingId}</Text>
       </View>
     </TouchableOpacity>
@@ -81,7 +81,7 @@ console.log(cityName)
         </TouchableOpacity>
 
         <TouchableOpacity style={{ flexDirection: 'row', flexGrow: 2 }}>
-          <Text style={{ fontSize: 15, color: 'black', fontWeight: '800' }}>Select Housing Location</Text>
+          <Text style={{ fontSize: 15, color: 'black', fontWeight: '500' ,fontFamily:"DMSansB"}}>Select Housing Location</Text>
         </TouchableOpacity>
       </View>
 

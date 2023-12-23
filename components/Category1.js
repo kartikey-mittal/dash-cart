@@ -3,10 +3,10 @@ import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const Category1 = () => {
   const imageUrls = [
-    'https://th.bing.com/th/id/OIG..fuOKiJrxyjhidoGc30u?pid=ImgGn',
-    'https://img.freepik.com/free-vector/different-stationery-items-blue-plastic-glass-composition-red-circle-white-background-realistic-vector-illustration_1284-19882.jpg',
-    'https://img.freepik.com/premium-vector/medicine-pharmacy_131590-145.jpg',
-    'https://www.freepngimg.com/thumb/grocery/53973-6-grocery-free-hq-image.png',
+    'https://i.ibb.co/qYKCdLk/Grocery.png',
+    'https://i.ibb.co/yFR7RGG/Stationary.png',
+    'https://i.ibb.co/gJy3Cpz/Mecial.png',
+    'https://i.ibb.co/fG0tqDY/Untitled-design-2.pngg',
     
     // Add more image URLs as needed
   ];
@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     borderColor:'red',
-    borderRadius:25,
+    borderRadius:10,
     borderWidth:0.4,
     margin:15,
-    marginTop:25,
+    marginTop:15,
     padding: 10, // Add padding to make the shadow visible
     backgroundColor: '#fff', // Change this to the desired background color
     shadowColor: '#000',
@@ -47,14 +47,14 @@ const styles = StyleSheet.create({
     
   },
   imageContainer: {
-    width: '50%',
+    width: '25%',
     aspectRatio: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
-    width: '80%',
-    height: '80%',
+    width: '100%',
+    height: '100%',
   },
 });
 

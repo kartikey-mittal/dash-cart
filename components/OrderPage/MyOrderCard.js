@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import FontLoader from '../../FontLoader';
 
 const MyOrderCard = () => {
     return (
+        <FontLoader>
         <TouchableOpacity>
             <View style={{
                 backgroundColor: 'white', margin: 10, borderRadius: 15, flex: 0, elevation: 1,
@@ -29,6 +31,7 @@ const MyOrderCard = () => {
                             textAlignVertical: 'center',
                             marginLeft: 15,
                             flexGrow: 1,
+                            fontFamily:"DMSans"
                         }}>
                         5th Aug 2023
                     </Text>
@@ -44,7 +47,8 @@ const MyOrderCard = () => {
                             margin: 2,
                             marginRight: 10,
                             alignItems: 'center',
-                            paddingHorizontal: 10
+                            paddingHorizontal: 10,
+                            fontFamily:"DMSansSB"
                         }}>
                         Dispacthed
                     </Text>
@@ -73,24 +77,25 @@ const MyOrderCard = () => {
                     {/*- ----------- Middle's Middle Part ------------------ */}
                     <View
                         style={{ flex: 0, width: '50%' }}>
-                        <Text style={{ color: 'black', fontSize: 17, marginTop: 20, fontWeight: 500 }}>
+                        <Text style={{ color: 'black', fontSize: 16, marginTop: 20, fontWeight: 500,fontFamily:"DMSansB" }}>
                             BigBasket
                         </Text>
-                        <Text style={{ color: '#7D7272', fontSize: 15, marginTop: 10 }}>
+                        <Text style={{ color: '#7D7272', fontSize: 15, marginTop: 10,fontFamily:"DMSans" }}>
                             ID 25474524
                         </Text>
-                        <Text style={{ color: '#7D7272', fontSize: 15, marginTop: 0 }}>
+                        <Text style={{ color: '#7D7272', fontSize: 15, marginTop: 0,fontFamily:"DMSans" }}>
                             5 Items
                         </Text>
                     </View>
                     {/*- ----------- Middle's Last Part ------------------ */}
                     <View style={{ flexGrow: 1, alignItems: 'center' }}>
-                        <Text style={{ fontSize: 15, fontWeight: 500, marginTop: 20 }}>Rs.250</Text>
-                        <Icon name="chevron-forward" size={20} color="#ababab" style={{ marginTop: 20 }} />
+                        <Text style={{ fontSize: 15, fontWeight: 500, marginTop: 20,fontFamily:"DMSansSB" }}>Rs.250</Text>
+                        <Icon name="chevron-forward" size={25} color="#ababab" style={{ marginTop: 20 }} />
                     </View>
                 </View>
             </View>
         </TouchableOpacity>
+        </FontLoader>
     );
 };
 

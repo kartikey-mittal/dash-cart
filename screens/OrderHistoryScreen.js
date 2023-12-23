@@ -6,6 +6,7 @@ import { SafeAreaView, StatusBar, Dimensions, TouchableOpacity, Text, Alert } fr
 
 import MyOrderCard from '../components/OrderPage/MyOrderCard';
 import OrderNavBar from '../components/OrderPage/OrderNavBar';
+import FontLoader from '../FontLoader';
 
 
 
@@ -13,6 +14,7 @@ const OrderHistoryScreen = () => {
 
 
     return (
+        <FontLoader>
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
             <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
             <OrderNavBar title="My Orders"  />
@@ -21,6 +23,7 @@ const OrderHistoryScreen = () => {
             <MyOrderCard />
 
         </SafeAreaView>
+        </FontLoader>
     );
 };
 

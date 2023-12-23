@@ -60,7 +60,7 @@ const CheckoutButton = ({ totalBillAmount }) => {
       <PanGestureHandler onGestureEvent={gestureHandler} onEnded={() => {}}>
         <Animated.View style={animatedStyle}>
           <TouchableOpacity style={styles.btn} onPress={handlePress}>
-            <Text style={styles.btnstyle}>Confirm</Text>
+            <Text style={styles.btnstyle}>finsih</Text>
             <MaterialIcons name="arrow-forward" size={30} color="darkgreen" style={{ marginLeft: 10 }} />
           </TouchableOpacity>
         </Animated.View>

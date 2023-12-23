@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import CartItemCard from '../components/CartPage/CartItemCard';
 import CartNavBar from '../components/CartPage/CartNavBar';
 import BillingComponent from '../components/CartPage/BillingComponent';
-
+import createOrder from '../components/CartPage/createOrder';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const CartScreen = () => {
@@ -69,9 +69,9 @@ const CartScreen = () => {
             }}
             onPress={handleConfirmOrder}
           >
-            <Text style={{ fontSize: 20, color: '#3388CB' }}>Confirm</Text>
+            <Text style={{ fontSize: 20, color: '#EB8633' ,fontFamily:'DMSansB'}}>Place Order</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ fontSize: 20, color: 'black', marginRight: 5 }}>{`₹${totalBillAmount}`}</Text>
+              <Text style={{ fontSize: 20, color: 'black', marginRight: 5 ,fontFamily:'DMSansB'}}>{`₹ ${totalBillAmount}`}</Text>
               <Icon name="arrow-forward" size={30} color="black" />
             </View>
           </TouchableOpacity>

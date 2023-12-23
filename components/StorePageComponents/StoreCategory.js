@@ -1,6 +1,7 @@
 // StoreCategory.js
 import React, { useState } from 'react';
 import { ScrollView, View, TouchableOpacity, Alert, Text, Image } from 'react-native';
+import FontLoader from '../../FontLoader';
 
 const StoreCategory = ({ categories, onSelectCategory }) => {
   const [selectedView, setSelectedView] = useState(categories[0]?.name || ''); // Set the default category name
@@ -12,6 +13,7 @@ const StoreCategory = ({ categories, onSelectCategory }) => {
   };
 
   return (
+    <FontLoader>
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ backgroundColor: '#f2f2f2', maxHeight: 110 }}>
       {categories.map((category) => (
         <TouchableOpacity key={category.name} onPress={() => handleCategoryClick(category)}>
@@ -20,11 +22,12 @@ const StoreCategory = ({ categories, onSelectCategory }) => {
               {/* Use the source prop of Image component to set the background image */}
               <Image style={{ width: '100%', height: '100%', resizeMode: 'contain', position: 'absolute', zIndex: -1 }} source={{ uri: category.image }} />
             </View>
-            <Text style={{ textAlign: 'center', marginTop: 0 }}>{category.name}</Text>
+            <Text style={{ textAlign: 'center', marginTop: 0,fontFamily:"DMSans" }}>{category.name}</Text>
           </View>
         </TouchableOpacity>
       ))}
     </ScrollView>
+    </FontLoader>
   );
 };
 

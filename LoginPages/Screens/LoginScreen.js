@@ -43,7 +43,7 @@ const LoginScreen = ({ navigation }) => {
                                         Let's start with your mobile number
                                 </Text>
                                 <Text style={styles.subheading}>
-                                        We'll send a text with a Verification
+                                        We'll send a text with a verification
                                         code.
                                 </Text>
                                 <View style={styles.buttons}>
@@ -107,15 +107,16 @@ const styles = StyleSheet.create({
                 marginHorizontal: 10,
                 height: "50%",
                 alignSelf: "center",
-
+                
                 marginTop: 80,
         },
         heading: {
                 fontSize: 28,
 
-                color: "#0A5098",
-                fontWeight: "900",
+                color: "#EB8633",
+                fontWeight: "300",
                 lineHeight: 40,
+                fontFamily:"DMSansB"
         },
         subheading: {
                 fontSize: 18,
@@ -126,6 +127,7 @@ const styles = StyleSheet.create({
                 lineHeight: 25,
                 color: "gray",
                 marginTop: 20,
+                fontFamily:"DMSansB"
         },
         buttons: {
                 marginTop: 50,
@@ -139,11 +141,13 @@ const styles = StyleSheet.create({
                 borderRadius: 6,
                 paddingLeft: 15,
                 color: "black",
-                fontWeight: "600"
+                fontWeight: "200",
+                fontFamily:"DMSansSB"
         },
         btnouttxt: {
-                color: "#0A5098",
+                color: "#405B7B",
                 fontWeight: "500",
+                fontFamily:"DMSans"
         },
         btn2: {
                 marginTop: 40,
@@ -157,17 +161,23 @@ const styles = StyleSheet.create({
                 fontWeight: "600",
         },
         submitbtn: {
-                width: 110,
+                width: 150,
                 height: 45,
-                backgroundColor: "#2C64F4",
+                backgroundColor: "#EB8633",
                 alignSelf: "center",
                 marginTop: 60,
-                borderRadius: 30,
+                borderRadius: 50,
+                fontFamily:'DMSansB',
+                justifyContent:'center'
         },
         submittxt: {
                 textAlign: "center",
                 paddingTop: 10,
                 color: "white",
+                fontSize:18,
+                fontFamily:'DMSansB',
+                padding:10
+
         },
 });
 
