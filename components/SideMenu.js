@@ -63,8 +63,8 @@ const SideMenu = ({username}) => {
               </TouchableOpacity>
             </View>
             <View style={{ backgroundColor: '#EB8633', flexGrow: 1 }}>
-              <Text style={{ color: 'white', fontSize: 20, fontWeight: 300, marginLeft: 5, marginTop: 15 }}>Welcome</Text>
-              <Text style={{ color: 'white', fontSize: 25, fontWeight: 400, marginLeft: 5, elevation: 5 }}>{username}</Text>
+              <Text style={{ color: '#fff', fontSize: 18, fontWeight: 300, marginLeft: 5, marginTop: 15 }}>Hiiiii !! 👋</Text>
+              <Text style={{ color: '#fff', fontSize: 20, fontWeight: 500, marginLeft: 5, marginBottom:10,elevation: 5 }}>{username} 😁</Text>
             </View>
 
 
@@ -80,19 +80,19 @@ const SideMenu = ({username}) => {
 
             <View style={{  }}>
               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', padding:10,flex:0,borderBottomWidth:0.2 ,borderColor:'#8F97A1',marginTop:5}} onPress={() => {/* Navigate to Home */ }}>
-                <Icon name="home" size={24} color="#EB8633" />
+                <Icon name="home" size={25} color="#405B7B" />
                 <Text style={{ marginLeft: 10 ,fontSize:15}}>Home</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', padding:10,borderBottomWidth:0.2,borderColor:'#8F97A1' }} onPress={() => {/* Navigate to My Orders */ }}>
-                <Icon name="list" size={24} color="#EB8633" />
+                <Icon name="list" size={25} color="#405B7B" />
                 <Text style={{ marginLeft: 10,fontSize:15 }}>My Orders</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', padding:10 ,borderBottomWidth:0.2,borderColor:'#8F97A1'}} onPress={() => {/* Navigate to Support */ }}>
-                <Icon name="help-circle" size={24} color="#EB8633" />
+                <Icon name="help-circle" size={25} color="#405B7B" />
                 <Text style={{ marginLeft: 10,fontSize:15 }}>Support</Text>
               </TouchableOpacity>
               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', padding:10,borderBottomWidth:0.2,borderColor:'#8F97A1' }} onPress={() => {/* Navigate to Contact Us */ }}>
-                <Icon name="mail" size={24} color="#EB8633" />
+                <Icon name="mail" size={25} color="#405B7B" />
                 <Text style={{ marginLeft: 10 ,fontSize:15}}>Contact Us</Text>
               </TouchableOpacity>
             </View>

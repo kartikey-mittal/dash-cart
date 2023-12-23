@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 
@@ -20,10 +20,11 @@ const NavBarStore = ({ storeName }) => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('CartScreen')}>
           {/* Use navigation.navigate to go to the CartScreen */}
-          <Icon name="cart" size={25} color="white" style={{ margin: 5 }} />
+          <Image source={require('../../assets/icons/cart.png')} style={{ width: 35, height: 35, marginRight:10 }}/>
+
         </TouchableOpacity>
       </View>
-    </View>
+    </View>    
   );
 };
 

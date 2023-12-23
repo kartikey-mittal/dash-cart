@@ -12,7 +12,7 @@ const SearchBar = () => {
 
                 <View style={{ flexDirection: 'row', backgroundColor: 'white', borderRadius: 10, padding: 10,  borderColor: '#858484', borderWidth: 1 }}>
                     <Icon name="search" size={20} color="black" />
-                    <TextInput placeholder="Search for products..." style={{ marginLeft: 10 }} />
+                    <TextInput placeholder="Search for products...🛍️" style={{ marginLeft: 10 }} />
                 </View>
             </View>
         </View>

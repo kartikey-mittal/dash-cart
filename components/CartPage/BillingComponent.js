@@ -23,6 +23,7 @@ const BillingComponent = ({ cart,totalBillAmount }) => {
                 <Text style={{ color: 'white' }}>Delivery Fee</Text>
                 <Text style={{ color: 'white' }}>{deliveryFee}</Text>
             </View>
+            
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 7, marginBottom: 3 }}>
                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>Bill Amount</Text>
                 <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#20f495' }}>{`₹${totalBillAmount}`}</Text>
