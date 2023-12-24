@@ -87,6 +87,7 @@ const StoreScreen = ({route}) => {
             return (
               <ItemCard
                 id={item.$id}
+                pid={item['Item-ID']}
                 title={item['Item-Name']}
                 price={valueStore}
                 discountPrice={item['Item-MRP']}

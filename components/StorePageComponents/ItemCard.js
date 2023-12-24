@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, updateCartItemQuantity } from '../../redux/actions/actions';
 import FontLoader from '../../FontLoader';
 
-const ItemCard = ({ id, title, price, discountPrice, image, weight }) => {
+const ItemCard = ({ id, title, price, discountPrice, image, weight ,pid}) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -39,7 +39,7 @@ const ItemCard = ({ id, title, price, discountPrice, image, weight }) => {
 //
   const handleAddClick = () => {
     Alert.alert('Document ID', `You clicked ADD for item with ID: ${id}`);
-    dispatch(addToCart({ id, title, price, quantity: 1, image }));
+    dispatch(addToCart({ id, title, price, quantity: 1, image,pid }));
     setQuantity(1);
   };
 

@@ -1,69 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect } from 'react';
+import { SafeAreaView, View } from 'react-native';
+import CircularProgress from '../components/CircularProgress';
+import { Client, Databases, ID } from 'appwrite';
+
+const client = new Client()
+  .setEndpoint('https://cloud.appwrite.io/v1')
+  .setProject('65773c8581b895f83d40');
+
+const databases = new Databases(client);
 
 const TestScreen = () => {
-  // Dummy data
-  const user_data = {
-    'User-City': 'Dadri',
-    'User-CityCode': '12345',
-    'User-Phone': '9876543210',
-    'User-SocietyName': 'Green Park',
-    'User-SocietyCode': 'GP123',
-    'User-SocietyBlock': 'A',
-    'User-SocietyFlat': '101',
-    'User-Name': 'John Doe',
-    'User-Email': 'johndoe@example.com',
-  };
-
-  // Save initial data to AsyncStorage
-  const storeData = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem('UserData', jsonValue)
-    } catch (e) {
-      // saving error
-      console.log(e);
-    }
-  }
-
-  // Merge new data with existing data
-  const mergeData = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.mergeItem('UserData', jsonValue)
-    } catch (e) {
-      // saving error
-      console.log(e);
-    }
-  }
-
-  // Fetch specific field
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('UserData')
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch(e) {
-      // error reading value
-      console.log(e);
-    }
-  }
-
   useEffect(() => {
-    storeData(user_data);
-    // mergeData({'User-Name': 'New Name'}); // This will only update 'User-Name' field
+    // Creating the order data
+    const orderData = {
+      'Order-ID': '12345',
+      'Order-Value': '100',
+      'Order-PayValue': '90',
+      'Store-ID': '789',
+      'User-ID': '567',
+      'Order-Status': 'Pending',
+      'Order-Created': '2023-01-01T12:00:00Z',
+      'Status-Key': '0',
+      'Order-Items': [
+        '3:2', // Item ID 3 with quantity 2
+        '5:2', // Item ID 5 with quantity 2
+      ],
+    };
 
-    // Fetch specific field
-    getData().then(data => {
-      console.log(data['User-Name']); // This will fetch 'User-Name' field
+    const promise = databases.createDocument('data-level-1', 'OrdersDB', ID.unique(), orderData);
+
+    promise.then(function (response) {
+      console.log('Document created:', response);
+    }, function (error) {
+      console.error('Error creating document:', error);
     });
   }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-  
+      <View style={{ height: 50 }}></View>
+      <CircularProgress />
     </SafeAreaView>
   );
-}
+};
 
 export default TestScreen;

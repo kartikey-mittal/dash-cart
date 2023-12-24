@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { removeFromCart, updateCartItemQuantity } from '../../redux/actions/actions';
 import FontLoader from '../../FontLoader';
 
-const CartItemCard = ({ id, title, price, quantity, image }) => {
+const CartItemCard = ({ id, title, price, quantity, image,pid }) => {
   const dispatch = useDispatch();
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
@@ -80,7 +80,7 @@ const CartItemCard = ({ id, title, price, quantity, image }) => {
           <MaterialIcons name="add" size={20} color="#EB8633" />
         </TouchableOpacity>
       </View>
-      <Text style={{fontWeight:"600",fontSize:16,position:"absolute",right:115,top:135,width:200}}>Item Total : ₹{totalPrice}</Text>
+      <Text style={{fontWeight:"600",fontSize:16,position:"absolute",right:115,top:135,width:200,fontFamily:'DMSansSB'}}>Item Total : ₹{totalPrice}</Text>
       <View style={{
         borderTopWidth:.4,
         borderTopColor:"F3EEEA",
