@@ -324,7 +324,8 @@ const CartScreen = () => {
             }}
             onPress={handleConfirmOrder}
           >
-            <Text style={{ fontSize: 20, color: '#fff', fontFamily: 'DMSansSB' }}>Cancel</Text>
+            {/* HELLO */}
+            <Text style={{ fontSize: 20, color: '#fff', fontFamily: 'DMSansSB' }}>CANCEL</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {/* <Text style={{ fontSize: 20, color: '#fea505', marginRight: 5, fontFamily: 'DMSansSB' }}></Text> */}
               {/* <Icon name="arrow-forward" size={30} color="black" /> */}
