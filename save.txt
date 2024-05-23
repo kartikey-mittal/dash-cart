@@ -1,0 +1,16 @@
+const order = /* Retrieved order document from Appwrite */;
+
+// Assume product ID you want to retrieve the quantity for is "product1"
+const productId = "product1";
+
+// Find the item detail string for the given product ID
+const itemDetail = order.itemDetails.find(detail => detail.startsWith(`${productId}:`));
+
+// If the item detail is found, extract the quantity
+let quantity;
+if (itemDetail) {
+    const [, quantityString] = itemDetail.split(':');
+    quantity = parseInt(quantityString, 10);
+}
+
+console.log(`Quantity for ${productId}: ${quantity}`);
