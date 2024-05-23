@@ -272,11 +272,19 @@ const CartScreen = () => {
   };
 
   return (
+<<<<<<< HEAD
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f4f3ee' }}>
       <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
 
       <CartNavBar storeName="Bigbasket" />
       <View style={{flex:1}}>
+=======
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
+
+      <CartNavBar storeName="Bigbasket" />
+      <BillingComponent totalBillAmount={totalBillAmount} />
+>>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
       <FlatList
         data={cartItems}
         keyExtractor={keyExtractor}
@@ -291,6 +299,7 @@ const CartScreen = () => {
           />
         )}
       />
+<<<<<<< HEAD
       </View>
      
       
@@ -332,10 +341,15 @@ const CartScreen = () => {
             </View>
           </TouchableOpacity>
           
+=======
+      {cartItems.length > 0 ? (
+        <>
+>>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
           <TouchableOpacity
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+<<<<<<< HEAD
               // alignItems: 'center',
            
               backgroundColor: '#0c356a',
@@ -366,6 +380,30 @@ const CartScreen = () => {
           </View>
           
           </View>
+=======
+              alignItems: 'center',
+              height: 60,
+              backgroundColor: 'white',
+              paddingHorizontal: 20,
+              position: 'absolute',
+              bottom: 0,
+              width: '98%',
+              borderColor: '#EB8633',
+              borderWidth: 2,
+              borderRadius: 100,
+              margin: 5,
+              marginRight: 10,
+              alignSelf: 'center',
+            }}
+            onPress={handleConfirmOrder}
+          >
+            <Text style={{ fontSize: 20, color: '#EB8633', fontFamily: 'DMSansB' }}>Place Order</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ fontSize: 20, color: 'black', marginRight: 5, fontFamily: 'DMSansB' }}>{`₹ ${totalBillAmount}`}</Text>
+              <Icon name="arrow-forward" size={30} color="black" />
+            </View>
+          </TouchableOpacity>
+>>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
         </>
       ) : (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

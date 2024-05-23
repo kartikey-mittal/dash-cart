@@ -66,9 +66,6 @@ const AddressNavBar2 = ({ onSaveAndContinue }) => {
       <TouchableOpacity
         style={{
           backgroundColor: '#0c356a',
-          padding: 10,
-          borderRadius: 10,
-          width: 200,
           alignItems: 'center',
           alignSelf: 'center',
           width: '90%',

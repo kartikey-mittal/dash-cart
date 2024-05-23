@@ -75,13 +75,8 @@ const ItemCard = ({ id, title, price, discountPrice, image, weight ,pid}) => {
           <View style={{ borderRadius: 5, padding: 4, alignItems: 'center',justifyContent:"center", height: 30, borderColor: '#0c356a', borderWidth: 1, width: 60 }}>
             <Text style={{ color: '#0c356a', fontSize: 14 ,fontFamily:"DMSansB"}}>ADD</Text>
           </View>
-        </TouchableOpacity>
       ) : (
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 10 }}>
-          {renderCounterButtons()}
-        </View>
-      )}
-    </View>
     </View>
     </FontLoader>
   );
