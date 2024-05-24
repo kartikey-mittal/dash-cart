@@ -24,22 +24,14 @@ const OrderScreen = () => {
     return (
         <FontLoader>
         <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
-<<<<<<< HEAD
             <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
-=======
-            <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
->>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
 
 
             <OrderNavBar title="Order Details" />
             <ProgressBar />
 
             {/*------------TAB BAR ⬇️⬇️⬇️⬇️ ------------------- */}
-<<<<<<< HEAD
             <View style={{ flexDirection: 'row', backgroundColor: '#0c356a', borderBottomWidth: 0.8, borderColor: 'blue' }}>
-=======
-            <View style={{ flexDirection: 'row', backgroundColor: '#EB8633', borderBottomWidth: 0.8, borderColor: 'blue' }}>
->>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
                 {['Summary', 'Items'].map((title) => {
                     const isActive = title === activeTab;
                     return (

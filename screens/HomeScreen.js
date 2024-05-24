@@ -64,22 +64,14 @@ const HomeScreen = () => {
     return (
       <FontLoader>
         <SafeAreaView style={{ flex: 1, }}>
-<<<<<<< HEAD
             <StatusBar backgroundColor="#0c356a" barStyle="dark-content" />
-=======
-            <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
->>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
             <MenuProvider>
             
                 <SideMenu username={userName}/>
                 
             <NavBar cityName={userCity} />
             <SearchBar />
-<<<<<<< HEAD
             <ScrollView style={{backgroundColor:'#f4f3ee'}}>
-=======
-            <ScrollView style={{backgroundColor:'#f2f2f2'}}>
->>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
            
             <Category1/>
             <StoresNear societyId={societyId}/>
