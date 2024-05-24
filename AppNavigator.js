@@ -19,6 +19,7 @@ import NameScreen from './LoginPages/Screens/NameScreen';
 
 
 
+
 const Stack = createStackNavigator();
 const AppNavigator = () => {
   return (

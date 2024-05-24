@@ -1,53 +1,122 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, View } from 'react-native';
-import CircularProgress from '../components/CircularProgress';
-import { Client, Databases, ID } from 'appwrite';
-import { TextInput } from 'react-native-gesture-handler';
-import { Text } from 'react-native';
-const client = new Client()
-  .setEndpoint('https://cloud.appwrite.io/v1')
-  .setProject('65773c8581b895f83d40');
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, TouchableOpacity, Alert } from 'react-native';
+import FontLoader from '../FontLoader';
+import Icon from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const databases = new Databases(client);
+const TestScreen = ({ productName, productWeight, originalPrice, discountedPrice, showDropdown }) => {
 
-const TestScreen = () => {
-  // useEffect(() => {
-  //   // Creating the order data
-  //   const orderData = {
-  //     'Order-ID': '12345',
-  //     'Order-Value': '100',
-  //     'Order-PayValue': '90',
-  //     'Store-ID': '789',
-  //     'User-ID': '567',
-  //     'Order-Status': 'Pending',
-  //     'Order-Created': '2023-01-01T12:00:00Z',
-  //     'Status-Key': '0',
-  //     'Order-Items': [
-  //       '3:2', // Item ID 3 with quantity 2
-  //       '5:2', // Item ID 5 with quantity 2
-  //     ],
-  //   };
+  const [quantity, setQuantity] = useState(0);
 
-  //   const promise = databases.createDocument('data-level-1', 'OrdersDB', ID.unique(), orderData);
+  const handleIncrement = () => {
+    setQuantity(prevQuantity => prevQuantity + 1);
+  };
 
-  //   promise.then(function (response) {
-  //     console.log('Document created:', response);
-  //   }, function (error) {
-  //     console.error('Error creating document:', error);
-  //   });
-  // }, []);
+  const handleDecrement = () => {
+    if (quantity > 0) {
+      setQuantity(prevQuantity => prevQuantity - 1);
+    } else {
+      Alert.alert("Quantity cannot be less than zero");
+    }
+  };
+
+  const handleAddClick = () => {
+    Alert.alert('ADD button clicked');
+    setQuantity(1);
+  };
+
+  const renderCounterButtons = () => (
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 10, borderWidth: 1, borderColor: "black", paddingHorizontal: 6, paddingVertical: 2, borderRadius: 10 }}>
+      <TouchableOpacity onPress={handleDecrement} style={{ padding: 1 }}>
+        <MaterialIcons name="remove" size={22} color="#EB8633" />
+      </TouchableOpacity>
+      <Text style={{ fontSize: 16, marginHorizontal: 5, fontFamily: "DMSansB" }}>{quantity}</Text>
+      <TouchableOpacity onPress={handleIncrement} style={{ padding: 1 }}>
+        <MaterialIcons name="add" size={22} color="#EB8633" />
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ height: 50 }}></View>
-      <CircularProgress />
+    <FontLoader>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ height: 50 }}></View>
 
-      <View style={{ height: 50, width: '45%', backgroundColor: 'white', borderRadius: 15, borderWidth: 0.5, flexDirection: 'row', alignItems: 'center',alignContent:'center' }}>
-        <Text style={{ color: 'black', fontSize: 20, justifyContent: 'center', fontWeight: 800, marginLeft: 10 }}>₹</Text>
-        <TextInput placeholder='Enter MRP in ₹' style={{marginLeft:10,borderBottomWidth:0.2,borderColor:'grey'}}></TextInput>
-      </View>
+        <View style={{
+          height: 120,
+          width: '90%',
+          backgroundColor: 'white',
+          borderRadius: 15,
+          borderWidth: 0.5,
+          flexDirection: 'row',
+          alignSelf: "center"
+        }}>
+          <View style={{
+            height: 100,
+            width: '28%',
+            backgroundColor: '#F4F3EE',
+            borderRadius: 15,
+            borderWidth: 0,
+            flexDirection: 'row',
+            alignSelf: "center",
+            marginLeft: 10
+          }}></View>
+          <View style={{
+            height: 120,
+            width: '65%',
+            borderRadius: 15,
+            borderWidth: 0,
+            flexDirection: 'column',
+            alignSelf: "center",
+            marginLeft: 15,
+            justifyContent: "center"
+          }}>
+            <Text style={{ fontFamily: "DMSansSB", fontSize: 16 }}>{productName}</Text>
+            <Text style={{
+              backgroundColor: "#F9EFE8",
+              marginTop: 10,
+              paddingHorizontal: 5,
+              paddingVertical: 2,
+              borderRadius: 5,
+              alignSelf: 'flex-start'
+            }}>
+              {productWeight}
+            </Text>
 
-    </SafeAreaView>
+            <View style={{ display: "flex", flexDirection: "row", marginTop: 10, justifyContent: "space-between" }}>
+              <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
+                <Text style={{
+                  marginRight: 10,
+                  textDecorationLine: "line-through",
+                  marginTop: 3,
+                  color: "grey"
+                }}>
+                  {originalPrice}
+                </Text>
+                <Text style={{ fontSize: 18, marginBottom: 10 }}>{discountedPrice}</Text>
+              </View>
+
+              <View style={{ marginLeft: 10 }}>
+                {showDropdown === 1 ? (
+                  quantity === 0 ? (
+                    <TouchableOpacity onPress={handleAddClick} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                      <View style={{ borderRadius: 5, padding: 0, alignItems: 'center', justifyContent: "center", height: 30, backgroundColor: "#EEF7FF", width: 60, paddingHorizontal: 7, display: "flex", flexDirection: "row" }}>
+                        <Text style={{ color: '#153448', fontSize: 14, fontFamily: "DMSansB" }}>ADD</Text>
+                        <Icon name="chevron-down-outline" size={20} color="pink" />
+                      </View>
+                    </TouchableOpacity>
+                  ) : (
+                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginBottom: 10, marginRight: 10 }}>
+                      {renderCounterButtons()}
+                    </View>
+                  )
+                ) : null}
+              </View>
+            </View>
+          </View>
+        </View>
+      </SafeAreaView>
+    </FontLoader>
   );
 };
 
