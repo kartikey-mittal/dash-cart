@@ -16,6 +16,7 @@ import Deliveryd from './LoginPages/Screens/Deliveryd';
 import CheckoutButton from './components/CartPage/CheckoutBtn';
 import Orderconfirmed from './components/CartPage/Orderconfirmed';
 import NameScreen from './LoginPages/Screens/NameScreen';
+import Test2 from './screens/Test2';
 
 
 
@@ -26,6 +27,7 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="TestScreen" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Test2" component={Test2} />
         <Stack.Screen name="Orderconfirmed" component={Orderconfirmed} />
         <Stack.Screen name="CheckoutBtn" component={CheckoutButton} />
         <Stack.Screen name="StoreScreen" component={StoreScreen} />

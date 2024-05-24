@@ -63,13 +63,8 @@ const StoreScreen = ({route}) => {
   const filteredItems = selectedCategory ? items.filter((item) => item['Item-Category'] === selectedCategory) : items;
 
   return (
-<<<<<<< HEAD
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f4f3ee' }}>
       <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
-=======
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f2f2' }}>
-      <StatusBar backgroundColor="#EB8633" barStyle="light-content" />
->>>>>>> 3edd26eab9b427cb1ce9dbe86d85556ed3e4d6ce
       <NavBarStore storeName={storename} />
       <SearchBarStore />
       <PromotionStore/>
