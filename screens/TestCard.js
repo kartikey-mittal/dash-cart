@@ -79,7 +79,8 @@ const TestCard = ({ productName, productWeight, originalPrice, discountedPrice, 
               paddingVertical: 1,
               borderRadius: 5,
               alignSelf: 'flex-start',
-              color:'#949494'
+              color:'#949494',
+              fontFamily:'DMSans'
             }}>
               {productWeight}
             </Text>
