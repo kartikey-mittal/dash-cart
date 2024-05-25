@@ -13,9 +13,9 @@ const NavBar = ({ cityName }) => {
     return (
       <FontLoader>
         <View style={{ flexDirection: 'row', alignItems: 'center', padding: 1, backgroundColor: '#0c356a',height:'60px' }}>
-  <TouchableOpacity style={{ backgroundColor: '#0c356a', borderRadius: 50, padding: 10, margin: 5 }}>
+  {/* <TouchableOpacity style={{ backgroundColor: '#0c356a', borderRadius: 50, padding: 10, margin: 5 }}>
     <Icon name="menu" size={25} color="#f4f3ee"onPress={toggleMenu} />
-  </TouchableOpacity>
+  </TouchableOpacity> */}
   
   <TouchableOpacity style={{ flexDirection: 'row', flexGrow:2 }} >
     <Text style={{ fontSize: 16, color: '#f4f3ee', fontWeight: '600',fontFamily:"DMSansB" }}>{cityName}</Text>

@@ -64,10 +64,10 @@ const HomeScreen = () => {
     return (
       <FontLoader>
         <SafeAreaView style={{ flex: 1, }}>
-            <StatusBar backgroundColor="#0c356a" barStyle="dark-content" />
+            <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
             <MenuProvider>
             
-                <SideMenu username={userName}/>
+                {/* <SideMenu username={userName}/> */}
                 
             <NavBar cityName={userCity} />
             <SearchBar />

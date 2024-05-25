@@ -20,6 +20,7 @@ import NameScreen from './LoginPages/Screens/NameScreen';
 import Test from './screens/Test';
 import WeightCardScreen from './screens/WeightCardScreen';
 import GlobalTest from './screens/GlobalTest';
+import ProfileScreen from './screens/ProfileScreen';
 
 
 
@@ -29,8 +30,9 @@ const AppNavigator = () => {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="GlobalTest" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Profile" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="GlobalTest" component={GlobalTest} />
         <Stack.Screen name="WeightCardScreen" component={WeightCardScreen} />

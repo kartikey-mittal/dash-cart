@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontLoader from '../../FontLoader';
 
-const GlobalSearchCard = ({ productimg, productName, productWeight, originalPrice, discountedPrice, showDropdown, onAddClick, shopname }) => {
+const GlobalSearchCard = ({ productimg, productName, productWeight, originalPrice, discountedPrice, showDropdown, onAddClick, shopname,waitingbar }) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleIncrement = () => {
@@ -27,7 +27,7 @@ const GlobalSearchCard = ({ productimg, productName, productWeight, originalPric
   };
 
   const renderCounterButtons = () => (
-    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: 10, borderWidth: 0.5, borderColor: "black", paddingHorizontal: 6, paddingVertical: 2, borderRadius: 10 }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginTop: -5, borderWidth: 0.5, borderColor: "black", paddingHorizontal: 6, paddingVertical: -5, borderRadius: 10,backgroundColor:'transparent' }}>
       <TouchableOpacity onPress={handleDecrement} style={{ padding: 1 }}>
         <MaterialIcons name="remove" size={22} color="#e6c2bf" />
       </TouchableOpacity>
@@ -44,7 +44,7 @@ const GlobalSearchCard = ({ productimg, productName, productWeight, originalPric
 
   return (
     <FontLoader>
-      <SafeAreaView style={{ flex: 1, marginTop: 30 }}>
+      {/* <SafeAreaView style={{ flex: 1, marginTop: 0 }}> */}
         <View style={{ height: 10 }}></View>
         <View style={{
           width: '95%',
@@ -56,13 +56,13 @@ const GlobalSearchCard = ({ productimg, productName, productWeight, originalPric
         }}>
           <View style={{
             height: 100,
-            width: '28%',
+            width: '25%',
             marginLeft: 10
           }}>
             <Image 
               source={{ uri: productimg }} 
               style={{ 
-                width: '70%', 
+                width: '80%', 
                 height: '100%', 
                 resizeMode: 'cover', 
                 borderRadius: 15,
@@ -78,56 +78,31 @@ const GlobalSearchCard = ({ productimg, productName, productWeight, originalPric
             flexDirection: 'column',
             alignSelf: "center",
             marginLeft: 0,
-            justifyContent: "center"
+            justifyContent: "center",
+          
           }}>
-            <Text style={{ fontFamily: "DMSansSB", fontSize: 16, color: '#454545' }}>{productName}</Text>
-            <View style={{ display: "flex", flexDirection: "row", marginTop: 10, justifyContent: "space-between" }}>
-              <View>
+            <Text style={{ fontFamily: "DMSansSB", fontSize: 16, color: '#454545',marginTop:5, }}>{productName}</Text>
+            <View style={{ display: "flex", flexDirection: "row", marginTop: 0, justifyContent: "space-between",backgroundColor:'transparent' ,width:'100%'}}>
+              <View style={{width:'40%',backgroundColor:'transparent'}}>
                 <Text style={{
                   backgroundColor: "#F9EFE8",
                   marginTop: 5,
                   paddingHorizontal: 8,
-                  paddingVertical: 1,
+                  paddingVertical: 5,
                   borderRadius: 5,
                   alignSelf: 'flex-start',
                   color: '#949494',
-                  fontFamily: 'DMSans'
+                  fontFamily: 'DMSans',
+                  fontSize:15
+                 
                 }}>
                   {productWeight}
                 </Text>
               </View>
-              <View style={{ display: "flex", flexDirection: "column",marginLeft:85,marginBottom:5 }}>
-                <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", backgroundColor: "#f4f6e7", borderTopRightRadius: 5, borderTopLeftRadius: 5, paddingHorizontal: 15, paddingVertical: 5 ,width:"80%"}}>
-                  <Text style={{ color: "#385aeb", fontFamily: "DMSans", textAlign: "left" }}>
-                    {truncateShopName(shopname)}
-                  </Text>
-                  <TouchableOpacity style={{ padding:1 }}>
-                    <MaterialIcons name="add-circle-outline" size={22} color="#949494" style={{ marginLeft: 10, borderWidth: 0 }} />
-                  </TouchableOpacity>
-                </View>
-                <View style={{ backgroundColor: "#7b3c15", height: 5, borderBottomLeftRadius: 5, borderBottomRightRadius: 5 ,width:"80%"}}>
-                  <View style={{ backgroundColor: "#9dcd5a", width: "50%", height: "100%", borderBottomLeftRadius: 5 }}></View>
-                </View>
-              </View>
-            </View>
-            <View style={{ display: "flex", flexDirection: "row", marginTop: 0, justifyContent: "space-between" }}>
-              <View style={{ display: "flex", flexDirection: "row", marginTop: 10 }}>
-                <Text style={{
-                  marginRight: 10,
-                  textDecorationLine: "line-through",
-                  marginTop: 3,
-                  color: "#949494",
-                  fontFamily: 'DMSans',
-                  fontSize: 12
-                }}>
-                  {originalPrice}
-                </Text>
-                <Text style={{ fontSize: 15, marginBottom: 10, color: '#474747', fontFamily: 'DMSansSB' }}>{discountedPrice}</Text>
-              </View>
-              <View style={{ marginLeft: 10 }}>
+              <View style={{ marginLeft: 10 ,marginTop:10,marginBottom:5}}>
                 {
                   quantity === 0 ? (
-                    <TouchableOpacity onPress={handleAddClick} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginRight: 3 }}>
+                    <TouchableOpacity onPress={handleAddClick} style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginRight: 3,marginTop:5 }}>
                       <View style={{ borderRadius: 10, padding: 0, alignItems: 'center', justifyContent: "center", height: 30, backgroundColor: "#f4f3ee", paddingHorizontal: 20, display: "flex", flexDirection: "row", borderColor: '#00356A', borderWidth: 1 }}>
                         <Text style={{ color: '#00356A', fontSize: 14, fontFamily: "DMSansB", paddingHorizontal: 10 }}>ADD</Text>
                         {showDropdown === 1 && <Icon name="chevron-down-outline" size={20} color="#e6c2bf" />}
@@ -141,9 +116,39 @@ const GlobalSearchCard = ({ productimg, productName, productWeight, originalPric
                 }
               </View>
             </View>
+            <View style={{ display: "flex", flexDirection: "row", marginTop: 0, justifyContent: "space-between" }}>
+              <View style={{ display: "flex", flexDirection: "column", marginTop: 2,width:'30%' }}>
+              <Text style={{ fontSize: 17, marginBottom: 0, color: '#474747', fontFamily: 'DMSansSB' }}>{discountedPrice}</Text>
+                <Text style={{
+                  marginRight: 10,
+                  textDecorationLine: "line-through",
+                  marginTop: 3,
+                  color: "#949494",
+                  fontFamily: 'DMSans',
+                  fontSize: 13,
+                  marginBottom:2
+                }}>
+                  {originalPrice}
+                </Text>
+                
+              </View>
+              <View style={{ display: "flex", flexDirection: "column",marginLeft:0,marginBottom:2,marginTop:10,width:135,marginLeft:29,backgroundColor:'transparent',justifyContent:'flex-end' }}>
+                <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: "#eaf6ee", borderTopRightRadius: 8, borderTopLeftRadius: 8, paddingHorizontal: 8, paddingVertical: 2 ,width:"85%",borderColor:'#00356A',borderTopWidth:0.5,borderLeftWidth:0.5,borderRightWidth:0.5,alignSelf:'flex-end'}}>
+                  <Text style={{ color: "#00356A", fontFamily: "DMSans", textAlign: "left",fontSize:15 }}>
+                    {truncateShopName(shopname)}
+                  </Text>
+                  <TouchableOpacity style={{ padding:1 }}>
+                    <MaterialIcons name="add-circle" size={25} color="#00356A" style={{ marginLeft: 0, borderWidth: 0 }} />
+                  </TouchableOpacity>
+                </View>
+                <View style={{ backgroundColor: "#d5080e", height: 5, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 ,width:"85%",borderBottomWidth:0.5,borderColor:"#00356A",borderLeftWidth:0.5,borderRightWidth:0.5,alignSelf:'flex-end'}}>
+                  <View style={{ backgroundColor: "#a4b308", width: waitingbar, height: "100%", borderBottomLeftRadius: 5 ,borderTopRightRadius:10,}}></View>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
-      </SafeAreaView>
+      {/* </SafeAreaView> */}
     </FontLoader>
   );
 };
