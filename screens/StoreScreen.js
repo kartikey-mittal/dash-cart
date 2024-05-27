@@ -7,6 +7,7 @@ import SearchBarStore from '../components/StorePageComponents/SearchBarStore';
 import StoreCategory from '../components/StorePageComponents/StoreCategory';
 import ItemCard from '../components/StorePageComponents/ItemCard';
 import PromotionStore from '../components/StorePageComponents/PromotionStore';
+import TestCard from './TestCard';
 const StoreScreen = ({route}) => {
   const { storeid ,storename} = route.params;
   const [items, setItems] = useState([]);
@@ -67,7 +68,7 @@ const StoreScreen = ({route}) => {
       <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
       <NavBarStore storeName={storename} />
       <SearchBarStore />
-      <PromotionStore/>
+      {/* <PromotionStore/> */}
       <StoreCategory categories={categories} onSelectCategory={setSelectedCategory} />
       
 
@@ -98,6 +99,24 @@ const StoreScreen = ({route}) => {
           }}
         />
       )}
+        <TestCard
+  productName="Doritos Tortilla Chips, "
+  productWeight="311.8 gm"
+  originalPrice="₹ 10.00"
+  discountedPrice="₹ 8.00"
+  showDropdown={1}
+  productimg="https://m.media-amazon.com/images/I/81nfmUmU2qL.jpg"
+  
+/>
+<TestCard
+  productName="Doritos Tortilla Chips, "
+  productWeight="311.8 gm"
+  originalPrice="₹ 10.00"
+  discountedPrice="₹ 8.00"
+  showDropdown={1}
+  productimg="https://m.media-amazon.com/images/I/81nfmUmU2qL.jpg"
+  
+/>
     </SafeAreaView>
   );
 };

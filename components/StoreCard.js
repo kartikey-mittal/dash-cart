@@ -59,9 +59,9 @@ const StoreCard = ({ shopName, shopType, shopAddress, shopId, shopTicketSize, sh
             }}
                 onPress={handlePress}>
                 <View style={{ backgroundColor: '#e6e6e6', width: 79, height: 75, borderRadius: 5, marginLeft: 10 }} />
-                <View style={{ marginLeft: 10 }}>
+                <View style={{ marginLeft: 10,backgroundColor:'red' }}>
                     <Text style={{ fontSize: 16, fontWeight: '500', marginLeft: 10, color: '#34495E' ,fontFamily:'DMSansB'}}>{shopName}</Text>
-                    <Text style={{ fontSize: 15, marginLeft: 10 ,fontFamily:'DMSansSB'}}>{shopType}</Text>
+                    <Text style={{ fontSize: 15, marginLeft: 10 ,fontFamily:'DMSansSB',backgroundColor:'yellow'}}>{shopType}</Text>
                     <Text style={{ fontSize: 14, marginLeft: 10 ,fontFamily:'DMSans'}}>{shopAddress}</Text>
                 </View>
                 

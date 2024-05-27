@@ -1,10 +1,17 @@
 // StoreCategory.js
-import React, { useState } from 'react';
-import { ScrollView, View, TouchableOpacity, Alert, Text, Image } from 'react-native';
-import FontLoader from '../../FontLoader';
+import React, { useState } from "react";
+import {
+  ScrollView,
+  View,
+  TouchableOpacity,
+  Alert,
+  Text,
+  Image,
+} from "react-native";
+import FontLoader from "../../FontLoader";
 
 const StoreCategory = ({ categories, onSelectCategory }) => {
-  const [selectedView, setSelectedView] = useState(categories[0]?.name || ''); // Set the default category name
+  const [selectedView, setSelectedView] = useState(categories[0]?.name || ""); // Set the default category name
 
   const handleCategoryClick = (category) => {
     setSelectedView(category.name);
@@ -14,19 +21,61 @@ const StoreCategory = ({ categories, onSelectCategory }) => {
 
   return (
     <FontLoader>
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ backgroundColor: '#f2f2f2', maxHeight: 110 }}>
-      {categories.map((category) => (
-        <TouchableOpacity key={category.name} onPress={() => handleCategoryClick(category)}>
-          <View style={{ margin: 10 }}>
-            <View style={{ width: 55, height: 55, borderWidth: 1, borderColor: selectedView === category.name ? 'black' : 'lightgray', justifyContent: 'center', alignItems: 'center', borderRadius: 10, overflow: 'hidden' }}>
-              {/* Use the source prop of Image component to set the background image */}
-              <Image style={{ width: '100%', height: '100%', resizeMode: 'contain', position: 'absolute', zIndex: -1 }} source={{ uri: category.image }} />
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        style={{ backgroundColor: "#f2f2f2" }}
+      >
+        {categories.map((category) => (
+          <TouchableOpacity
+            key={category.name}
+            onPress={() => handleCategoryClick(category)}
+          >
+            {/* <View style={{ margin: 10 }}> */}
+            <View
+              style={{
+                borderWidth: 0.1,
+                borderColor:
+                  selectedView === category.name ? "black" : "lightgray",
+                justifyContent: "space-between",
+                alignItems: "center",
+                borderRadius: 10,
+                overflow: "hidden",
+                backgroundColor: "red",
+                display: "flex",
+                height: 50,
+                marginHorizontal:10,
+                marginTop:10
+              }}
+            >
+              <Image
+                style={{
+                  padding: 0,
+                  zIndex: -1,
+                  height: "100%",
+                  width: "100%",
+                  padding:5,
+                  resizeMode:"cover"
+                }}
+                source={{ uri: category.image }}
+                resizeMode="cover"
+              />
             </View>
-            <Text style={{ textAlign: 'center', marginTop: 0,fontFamily:"DMSans" }}>{category.name}</Text>
-          </View>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+
+            <Text
+              style={{
+                backgroundColor: "transparent",
+                marginTop: 0,
+                fontFamily: "DMSans",
+                alignSelf: "flex-end",
+              }}
+            >
+              `hey{category.name}`
+            </Text>
+            {/* </View> */}
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </FontLoader>
   );
 };

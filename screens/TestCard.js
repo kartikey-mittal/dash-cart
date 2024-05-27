@@ -86,12 +86,12 @@ const TestCard = ({ productimg, productName, productWeight, originalPrice, disco
                   backgroundColor: "#F9EFE8",
                   marginTop: 5,
                   paddingHorizontal: 8,
-                  paddingVertical: 5,
+                  paddingVertical: 0,
                   borderRadius: 5,
                   alignSelf: 'flex-start',
                   color: '#949494',
                   fontFamily: 'DMSans',
-                  fontSize:15
+                  fontSize:13
                  
                 }}>
                   {productWeight}
@@ -115,12 +115,12 @@ const TestCard = ({ productimg, productName, productWeight, originalPrice, disco
               </View>
             </View>
             <View style={{ display: "flex", flexDirection: "row", marginTop: 0, justifyContent: "space-between" }}>
-              <View style={{ display: "flex", flexDirection: "column", marginTop: 2,width:'30%' }}>
+              <View style={{ display: "flex", flexDirection: "column", marginTop: 2,flex:1,backgroundColor:'transparent' }}>
               <Text style={{ fontSize: 17, marginBottom: 0, color: '#474747', fontFamily: 'DMSansSB' }}>{discountedPrice}</Text>
                 <Text style={{
                   marginRight: 10,
                   textDecorationLine: "line-through",
-                  marginTop: 3,
+                  marginTop: 0,
                   color: "#949494",
                   fontFamily: 'DMSans',
                   fontSize: 13,

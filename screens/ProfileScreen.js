@@ -12,17 +12,19 @@ import {
   Alert,
 } from "react-native";
 import FontLoader from "../FontLoader";
+import BottomNavBar from "../components/BottomNavBar";
 
 const ProfileScreen = () => {
   return (
     <FontLoader>
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#f2f2f2" }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "transparent",height:'100vh' }}>
         <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
+        <View style={{height:'100vh',backgroundColor:'transparent'}}>
         <View
-          style={{ padding: 10, backgroundColor: "#0c356a", paddingLeft: 10 }}
+          style={{ padding: 10, backgroundColor: "#0c356a", paddingLeft: 10, }}
         >
           <Text
-            style={{
+            style={{    
               color: "white",
               fontFamily: "DMSansSB",
               fontSize: 25,
@@ -30,6 +32,7 @@ const ProfileScreen = () => {
               marginBottom: 8,
             }}
           >
+           
             Kartikey Mittal
           </Text>
           <Text
@@ -101,7 +104,7 @@ const ProfileScreen = () => {
               color="#A9B6C6"
             />
             <Text
-              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 18 ,width:'85%' }}
+              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 15 ,width:'85%' }}
             >
               
               My Order
@@ -139,7 +142,7 @@ const ProfileScreen = () => {
               color="#A9B6C6"
             />
             <Text
-              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 18 ,width:'85%' }}
+              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 15 ,width:'85%' }}
             >
               
               Help
@@ -162,7 +165,8 @@ const ProfileScreen = () => {
               color="#A9B6C6"
             />
             <Text
-              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 18 ,width:'85%' }}
+              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 15
+               ,width:'85%' }}
             >
               
               Terms and Condition
@@ -199,7 +203,7 @@ const ProfileScreen = () => {
               color="#A9B6C6"
             />
             <Text
-              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 18 ,width:'85%' }}
+              style={{ color: "#454545", fontFamily: "DMSans", fontSize: 15 ,width:'85%' }}
             >
               
              LogOut
@@ -211,6 +215,8 @@ const ProfileScreen = () => {
               color="#C5DED8"
             />
           </View>
+        </View>
+       
         </View>
       </SafeAreaView>
     </FontLoader>

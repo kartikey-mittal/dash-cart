@@ -32,7 +32,7 @@ const GlobalTest = () => {
   productName="Apple iPhone 13 Pro Max"
   productWeight="256GB"
   originalPrice="₹ 1,54429"
-  discountedPrice="₹ 1,14559"
+  discountedPrice="₹ 1,1455339"
   showDropdown={1}
   productimg="https://www.apple.com/newsroom/images/product/iphone/geo/Apple_iPhone-13-Pro_iPhone-13-Pro-Max_GEO_09142021_inline.jpg.slideshow-large_2x.jpg"
   shopname="Swiggy"

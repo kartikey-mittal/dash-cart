@@ -1,6 +1,7 @@
 import React from "react"
 import TestCard from "./TestCard";
 import { View } from "react-native";
+import OrderItemCard from "./OrderItemCard";
 const Test = () => {
   return (
     <>
@@ -43,6 +44,16 @@ const Test = () => {
   showDropdown={1}
   productimg="https://static.toiimg.com/photo/63797959.cms"
   shopname="BigBasket"
+  waitingbar={50}
+/>
+<OrderItemCard
+  productName="Whole Wheat Flour"
+  productWeight="Pack of 10 Item"
+  originalPrice="₹ 250.00"
+  discountedPrice="₹ 220.00"
+  showDropdown={1}
+  productimg="https://static.toiimg.com/photo/63797959.cms"
+  shopname="₹ 440.00"
   waitingbar={50}
 />
     </>
