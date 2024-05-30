@@ -58,18 +58,7 @@ const Test2 = () => {
         productimg="https://m.media-amazon.com/images/I/712l62VZ0mL._AC_UF1000,1000_QL80_.jpg"
         onAddClick={() => handleButtonPress(1)} // Pass the handleButtonPress function as a prop
       />
-      {/* <Button
-        title="Open Bottom Sheet with 1 Card"
-        onPress={() => handleButtonPress(1)}
-      />
-      <Button
-        title="Open Bottom Sheet with 2 Cards"
-        onPress={() => handleButtonPress(2)}
-      />
-      <Button
-        title="Open Bottom Sheet with 3 Cards"
-        onPress={() => handleButtonPress(3)}
-      /> */}
+      
       <BottomSheet
         ref={sheetRef}
         index={-1}

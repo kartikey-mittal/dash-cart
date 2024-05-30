@@ -1,9 +1,10 @@
-// App.js
 import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import MainContainer from './MainContainer';
-import store from './redux/store/store'; // Ensure this path is correct
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'; 
+import store from './redux/store/store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler'; 
 
 const App = () => {
   const [currentRouteName, setCurrentRouteName] = useState('LoginScreen');
@@ -27,9 +28,13 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer onStateChange={handleStateChange}>
-        <MainContainer currentRouteName={currentRouteName} />
-      </NavigationContainer>
+      <GestureHandlerRootView style={{ flex: 1 }}> 
+        <BottomSheetModalProvider>
+          <NavigationContainer onStateChange={handleStateChange}>
+            <MainContainer currentRouteName={currentRouteName} />
+          </NavigationContainer>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </Provider>
   );
 };

@@ -1,379 +1,324 @@
-import React, { useState } from 'react';
-import { View, SafeAreaView, StatusBar, FlatList, Text, TouchableOpacity } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import CartItemCard from '../components/CartPage/CartItemCard';
+import React, { useState, useEffect } from 'react';
+import { View, SafeAreaView, StatusBar, FlatList, Text, TouchableOpacity, StyleSheet,Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/Ionicons';
 import CartNavBar from '../components/CartPage/CartNavBar';
 import BillingComponent from '../components/CartPage/BillingComponent';
-import createOrder from '../components/CartPage/createOrder';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Client, Databases, ID, Query } from 'appwrite';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const client = new Client()
-  .setEndpoint('https://cloud.appwrite.io/v1')
-  .setProject('65773c8581b895f83d40');
+import { Client, Databases, Query } from 'appwrite';
 
+const client = new Client();
+client.setEndpoint('https://cloud.appwrite.io/v1');
+client.setProject('65773c8581b895f83d40');
+const databases = new Databases(client);
 
 const CartScreen = () => {
-  const cartItems = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
-  const [storeDetails, setStoreDetails] = useState(null);
+  const [storeData, setStoreData] = useState({});
+  const [selectedStoreId, setSelectedStoreId] = useState(null);
+  const [totalBillAmount, setTotalBillAmount] = useState(0);
+  const [productDetails, setProductDetails] = useState({});
 
-  const keyExtractor = (item) => (item.id ? item.id.toString() : Math.random().toString());
-  const totalBillAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-
-  const databases = new Databases(client);
-
-  const handleConfirmOrder = async () => {
-    try {
-      const getCurrentDateTime = () => {
-        const now = new Date();
-        const formattedDate = now.toISOString(); // You can format the date according to your requirements
-        return formattedDate;
-      };
-
-      // Fetch Store-ID from AsyncStorage
-      const storeId = await AsyncStorage.getItem('storeid');
-      const userData = await AsyncStorage.getItem('UserData');
-      const userId = JSON.parse(userData)?.['User-Phone'];
-
-      // Use Query.equal to search for documents with the specified storeid
-      const responseStores = await databases.listDocuments('data-level-1', 'StoresDB', [
-        Query.equal('Store-ID', storeId),
-        Query.select(['Store-TicketSize']),
-      ]);
-
-      // Check if any documents were found in StoresDB
-      if (responseStores.documents.length > 0) {
-        const storeTicketSize = responseStores.documents[0]['Store-TicketSize'];
-        console.log('Store Ticket Size:', storeTicketSize);
-
-        // Now, query the WaitingListDB collection
-        const responseWaitingList = await databases.listDocuments('data-level-1', 'WaitingListDB', [
-          Query.equal('StoreID', storeId),
-          Query.select(['Amount']),
-        ]);
-
-        // Check if any documents were found in WaitingListDB
-        if (responseWaitingList.documents.length > 0 || responseWaitingList.documents.length <= 0) {
-          // Calculate the sum of Store-CurrentSize from all documents in WaitingListDB
-          const totalCurrentSize = responseWaitingList.documents.reduce(
-            (total, doc) => total + (parseFloat(doc['Amount']) || 0),
-            0
-          );
-          console.log('Total Current Size in WaitingListDB:', totalCurrentSize);
-
-          // Check if (totalCurrentSize + totalBillAmount) is less than storeTicketSize
-          const combinedSize = totalCurrentSize + totalBillAmount;
-          console.log(combinedSize);
-
-          let orderId; // Declare orderId outside the if-else block
-
-          if (combinedSize < storeTicketSize) {
-            // Code for the condition where combinedSize is less than storeTicketSize
-            console.log('Going in waiting list and ordersDB');
-            const generateOrderId = () => Math.floor(10000 + Math.random() * 90000);
-
-            const isOrderIdUnique = async (orderId) => {
-              try {
-                const response = await databases.listDocuments('data-level-1', 'OrdersDB', [
-                  Query.equal('Order-ID', String(orderId)),
-                ]);
-                return response.documents.length === 0;
-              } catch (error) {
-                console.error('Error checking Order-ID uniqueness:', error);
-                return false;
-              }
-            };
-
-            do {
-              orderId = generateOrderId();
-            } while (!(await isOrderIdUnique(orderId)));
-
-            const orderData = {
-              'Order-ID': orderId,
-              'Order-Value': totalBillAmount,
-              'Order-PayValue': totalBillAmount,
-              'Store-ID': storeId,
-              'User-ID': userId,
-              'Order-Status': 'Awaiting Confirmation',
-              'Order-Created': getCurrentDateTime(),
-              'Order-Items': cartItems.map((item) => `${item.pid}:${item.quantity}`),
-              'Status-Key': 0,
-            };
-
-            const waitingListData = {
-              'StoreID': storeId,
-              'StoreCurrentSize': combinedSize,
-              'StoreTicketSize': storeTicketSize,
-              'UserID': userId,
-              'Amount': totalBillAmount,
-              'Delivery': 0,
-              'Order-ID': orderId,
-              // Add other attributes as needed
-            };
-
-            try {
-              const orderPromise = databases.createDocument('data-level-1', 'OrdersDB', ID.unique(), orderData);
-              const waitingListPromise = databases.createDocument('data-level-1', 'WaitingListDB', ID.unique(), waitingListData);
-
-              await Promise.all([orderPromise, waitingListPromise]);
-
-              console.log('Order and WaitingList documents created successfully!');
-            } catch (error) {
-              console.error('Error creating documents:', error);
-            }
-          } else {
-
-            //----------------- if (combineSize > storeTicket)  ⬇️⬇️⬇️-----------------------------
-            console.log('Order can be placed successfully in the else condition!');
-
-            const generateOrderIdElse = () => Math.floor(10000 + Math.random() * 90000);
-            let orderIdElse;
-
-            const isOrderIdUniqueElse = async (orderId) => {
-              try {
-                const response = await databases.listDocuments('data-level-1', 'OrdersDB', [
-                  Query.equal('Order-ID', String(orderId)),
-                ]);
-                return response.documents.length === 0;
-              } catch (error) {
-                console.error('Error checking Order-ID uniqueness in else condition:', error);
-                return false;
-              }
-            };
-
-            do {
-              orderIdElse = generateOrderIdElse();
-            } while (!(await isOrderIdUniqueElse(orderIdElse)));
-
-            const waitingListDataElse = {
-              'StoreID': storeId,
-              'StoreCurrentSize': combinedSize,
-              'StoreTicketSize': storeTicketSize,
-              'UserID': userId,
-              'Amount': totalBillAmount,
-              'Delivery': 0,
-              'Order-ID': orderIdElse,
-              // Add other attributes as needed
-            };
-
-            const orderDataElse = {
-              'Order-ID': orderIdElse,
-              'Order-Value': totalBillAmount,
-              'Order-PayValue': totalBillAmount,
-              'Store-ID': storeId,
-              'User-ID': userId,
-              'Order-Status': 'Awaiting Confirmation',
-              'Order-Created': getCurrentDateTime(),
-              'Order-Items': cartItems.map((item) => `${item.pid}:${item.quantity}`),
-              'Status-Key': 1,
-            };
-
-            try {
-              const waitingListPromiseElse = databases.createDocument('data-level-1', 'WaitingListDB', ID.unique(), waitingListDataElse);
-              const orderPromiseElse = databases.createDocument('data-level-1', 'OrdersDB', ID.unique(), orderDataElse);
-
-              await Promise.all([waitingListPromiseElse, orderPromiseElse]);
-              //------------------------TESTING-------------------
-
-              //------------------- Fetching OrderID to update data ⬇️⬇️---------------------
-              const waitingListResponse = await databases.listDocuments('data-level-1', 'WaitingListDB', [
-                Query.equal('StoreID', storeId),
-                Query.select(['Order-ID', 'Amount']), // Add other attributes as needed
-              ]);
-
-              // Log the waiting list data
-
-
-              const orderIDsToUpdate = waitingListResponse.documents.map((doc) => doc['Order-ID']);
-              console.log(orderIDsToUpdate);
-              //------------------- Fetching OrderID to update data ⬆️⬆️---------------------
-
-              for (const orderIDToUpdate of orderIDsToUpdate) {
-                try {
-                  // Find the corresponding Order document using Query.equal
-                  const orderDocumentResponse = await databases.listDocuments('data-level-1', 'OrdersDB', [
-                    Query.equal('Order-ID', orderIDToUpdate),
-                  ]);
-
-                  // Check if any documents were found
-                  if (orderDocumentResponse.documents.length > 0) {
-                    const orderDocumentID = orderDocumentResponse.documents[0]['$id']; // Get the document ID
-
-
-                    // Update the Order document with the specified document ID
-                    const orderUpdateResponse = await databases.updateDocument(
-                      'data-level-1',
-                      'OrdersDB',
-                      orderDocumentID,
-                      {
-                        'Status-Key': '5',
-                        // Add other fields to update as needed
-                      }
-                    );
-
-                    console.log(`Order document with Order-ID ${orderIDToUpdate} updated successfully!`);
-
-                    // Log the Order document ID
-                    console.log(`Document ID for Order-ID ${orderIDToUpdate}: ${orderDocumentID}`);
-                  } else {
-                    console.log(`No Order document found for Order-ID ${orderIDToUpdate}`);
-                  }
-                } catch (error) {
-                  console.error(`Error fetching Order document ID for Order-ID ${orderIDToUpdate}:`, error);
-                  // Handle the error accordingly
-                }
-              }
-
-
-              //------------------------TESTING⬆️⬆️-------------------
-
-
-              console.log('WaitingList and Order documents created successfully in the else condition!');
-
-            } catch (error) {
-              console.error('Error creating documents in the else condition:', error);
-              // Handle the error accordingly
-            }
-          }
-          //-------------------- if (combineSize > storeTicket)CLOSED ⬆️⬆️⬆️------------------------
-
-
-
-
-        } else {
-          console.log('No documents found in WaitingListDB for the specified Store-ID.');
+  useEffect(() => {
+    const fetchDataFromAsyncStorage = async () => {
+      try {
+        const data = await AsyncStorage.getItem('storeData');
+        const parsedData = data ? JSON.parse(data) : {};
+        setStoreData(parsedData);
+  
+        const firstStoreId = Object.keys(parsedData)[0];
+        if (firstStoreId) {
+          setSelectedStoreId(firstStoreId);
         }
-
-      } else {
-        console.log('Store not found in StoresDB.');
+      } catch (error) {
+        console.error('Error fetching data from AsyncStorage:', error);
       }
-
-      // Additional logic if needed after the if-else block
-      // ...
-
+    };
+  
+    fetchDataFromAsyncStorage();
+  }, []);
+  
+  useEffect(() => {
+    if (selectedStoreId && storeData[selectedStoreId]) {
+      fetchProductDetails();
+      fetchShopPrices();
     }
+  }, [selectedStoreId]);
 
-    // Generate a random 5-digit Order-ID
+  
 
-    // Dispatch any actions needed for your Redux store after the order is placed
-    // ...
+  useEffect(() => {
+    calculateTotalBillAmount();
+  }, [productDetails, storeData]);
 
-    // Clear the cart or perform any other necessary actions
-    // ...
-
-    // Show a success message to the user or navigate to the order confirmation screen
-    // ...
-    catch (error) {
-      console.error('Error placing order:', error);
-      // Handle the error as needed
+  const fetchProductDetails = async () => {
+    const itemsData = storeData[selectedStoreId]?.itemsdata || [];
+    
+    console.log('itemsData:', itemsData);
+ 
+    try {
+      const productIds = [...new Set(itemsData.map(item => item.productid))];
+      console.log('productIds:', productIds);
+  
+      const promises = productIds.map(id => 
+        databases.listDocuments('data-level-1', '664f1ca60037dad0be9c', [Query.equal('ProductID', id)])
+      );
+      const results = await Promise.all(promises);
+      console.log('product details results:', results);
+  
+      const details = results.reduce((acc, res) => {
+        res.documents.forEach(doc => {
+          acc[doc.ProductID] = doc; // Changed from doc.$id to doc.ProductID
+        });
+        return acc;
+      }, {});
+      
+      console.log('Product Details:', details);
+      setProductDetails(details);
+    } catch (error) {
+      console.error('Error fetching product details:', error);
     }
   };
+  
+
+  const fetchShopPrices = async () => {
+    try {
+      const response = await databases.listDocuments('data-level-1', 'Shop_ItemsDB_testing', [
+        Query.equal('SHOP_ID', selectedStoreId)
+      ]);
+      console.log('prices response:', response);
+  
+      const documents = response.documents;
+      if (documents.length > 0) {
+        const prices = documents[0]['Shop_Items-SP'] || [];
+        console.log('prices:', prices);
+  
+        const updatedStoreData = { ...storeData };
+        const itemsData = updatedStoreData[selectedStoreId]?.itemsdata || [];
+  
+        itemsData.forEach(item => {
+          const variantKey = `${item.productid}.${item.variantid}`;
+          const shopItemPrice = prices.find(sp => sp.startsWith(variantKey));
+          if (shopItemPrice) {
+            const sellingPrice = shopItemPrice.split(':')[1];
+            item.sellingPrice = parseFloat(sellingPrice);
+          }
+        });
+  
+        console.log('Updated Store Data:', updatedStoreData);
+        setStoreData(updatedStoreData);
+      } else {
+        console.log('No documents found in response.');
+      }
+    } catch (error) {
+      console.error('Error fetching shop prices:', error);
+    }
+  };
+  
+  
+  
+
+  const calculateTotalBillAmount = () => {
+    if (selectedStoreId && storeData[selectedStoreId]) {
+      const itemsData = storeData[selectedStoreId].itemsdata;
+      const totalAmount = itemsData.reduce((sum, item) => sum + (item.qty * item.sellingPrice), 0);
+      setTotalBillAmount(totalAmount);
+    }
+  };
+
+  const handleIncrementQuantity = (productid, variantid) => {
+    const updatedStoreData = { ...storeData };
+    const selectedStoreItems = updatedStoreData[selectedStoreId].itemsdata;
+
+    const itemIndex = selectedStoreItems.findIndex(item => item.productid === productid && item.variantid === variantid);
+    if (itemIndex !== -1) {
+      selectedStoreItems[itemIndex].qty += 1;
+      setStoreData(updatedStoreData);
+      saveDataToAsyncStorage(updatedStoreData);
+    }
+  };
+
+  const handleDecrementQuantity = (productid, variantid) => {
+    const updatedStoreData = { ...storeData };
+    const selectedStoreItems = updatedStoreData[selectedStoreId].itemsdata;
+  
+    const itemIndex = selectedStoreItems.findIndex(item => item.productid === productid && item.variantid === variantid);
+    if (itemIndex !== -1) {
+      if (selectedStoreItems[itemIndex].qty === 1) {
+        // Remove the item if its quantity is 1
+        selectedStoreItems.splice(itemIndex, 1);
+      } else {
+        selectedStoreItems[itemIndex].qty -= 1;
+      }
+      setStoreData(updatedStoreData);
+      saveDataToAsyncStorage(updatedStoreData);
+    }
+  };
+  
+
+  const saveDataToAsyncStorage = async (data) => {
+    try {
+      await AsyncStorage.setItem('storeData', JSON.stringify(data));
+    } catch (error) {
+      console.error('Error saving data to AsyncStorage:', error);
+    }
+  };
+
+  const renderStoreButtons = () => {
+    return Object.keys(storeData).map(storeId => (
+      <TouchableOpacity
+        key={storeId}
+        style={[styles.storeButton, selectedStoreId === storeId && styles.selectedStoreButton]}
+        onPress={() => setSelectedStoreId(storeId)}
+      >
+        <Text style={styles.storeButtonText}>{storeData[storeId].storename}</Text>
+      </TouchableOpacity>
+    ));
+  };
+
+  const renderCartItem = ({ item }) => {
+    const product = productDetails[item.productid] || {};
+    const sellingPrice = item.sellingPrice || 0;
+    console.log(sellingPrice);
+  
+    console.log('Rendering item:', item, 'with product details:', product, 'and selling price:', sellingPrice);
+  
+    const variantKey = `${item.productid}.${item.variantid}`;
+    const variantInfo = product["Product_ID-Weight"]?.find(v => v.startsWith(variantKey + ":")) || '';
+    const weight = variantInfo.split(':')[1]?.trim() || 'N/A';  // Add trim() to remove any leading/trailing spaces
+    const mrpInfo = product["Product-MRP"]?.find(m => m.startsWith(variantKey + ":")) || '';
+    const mrp = mrpInfo.split(':')[1]?.trim() || 'N/A';  // Add trim() to remove any leading/trailing spaces
+  
+    return (
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
+        <View>
+          <Text style={{ fontSize: 16 }}>{product.Product_Name}</Text>
+          <Text style={{ fontSize: 16 }}>{product.Product_Image}</Text>
+          <Image source={{ uri: product.Product_Image }}  style={{height:50,width:50}}></Image>
+          <Text style={{ fontSize: 14, color: '#888' }}>Weight: {weight}</Text>
+          <Text style={{ fontSize: 14, color: '#888' }}>MRP: ₹{mrp}</Text>
+          <Text style={{ fontSize: 14, color: '#888' }}>Selling Price: ₹{sellingPrice}</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => handleDecrementQuantity(item.productid, item.variantid)} style={{ padding: 10, backgroundColor: '#eee', borderRadius: 5 }}>
+            <Text style={{ fontSize: 20 }}>-</Text>
+          </TouchableOpacity>
+          <Text style={{ marginHorizontal: 10, fontSize: 16 }}>{item.qty}</Text>
+          <TouchableOpacity onPress={() => handleIncrementQuantity(item.productid, item.variantid)} style={{ padding: 10, backgroundColor: '#eee', borderRadius: 5 }}>
+            <Text style={{ fontSize: 20 }}>+</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+  
+  
+  
+
+  const selectedStoreItems = selectedStoreId ? storeData[selectedStoreId].itemsdata : [];
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f4f3ee' }}>
       <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
 
-      <CartNavBar storeName="Bigbasket" />
-      <View style={{flex:1}}>
-      <FlatList
-        data={cartItems}
-        keyExtractor={keyExtractor}
-        renderItem={({ item }) => (
-          <CartItemCard
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            quantity={item.quantity}
-            image={item.image}
-            pid={item.pid}
-          />
-        )}
-      />
+      <CartNavBar storeName="Cart" />
+
+      <View style={styles.storeButtonsContainer}>
+        {renderStoreButtons()}
       </View>
-     
-      
-      {cartItems.length > 0 ? (
-        <>
-<View style={{height:'500px'}}>
 
+      <View style={{ flex: 1 }}>
+        {selectedStoreItems.length > 0 ? (
+          <FlatList
+            data={selectedStoreItems}
+            keyExtractor={(item) => `${item.productid}-${item.variantid}`}
+            renderItem={renderCartItem}
+          />
+        ) : (
+          <View style={styles.emptyCartContainer}>
+            <Text>Your cart is empty</Text>
+          </View>
+        )}
+      </View>
 
+      <BillingComponent totalBillAmount={totalBillAmount} />
 
-<View><BillingComponent totalBillAmount={totalBillAmount} /></View>
-<View  style={{backgroundColor:'#fff',display:'flex',flexDirection:'row',justifyContent:'space-between'}}><TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              // alignItems: 'center',
-           
-              backgroundColor: '#fc2c1e',
-              paddingHorizontal: 20,
-              // position: 'absolute',
-              bottom: 0,
-              width: '28%',
-              borderColor: '#000',
-              borderBottomWidth: 5,
-              borderLeftWidth:0.5,
-              borderRightWidth:2,
-              borderRadius: 20,
-              margin: 5,
-              marginRight: 10,
-              alignSelf: 'center',
-              padding:10
-            }}
-            onPress={handleConfirmOrder}
-          >
-            <Text style={{ fontSize: 20, color: '#fff', fontFamily: 'DMSansSB' }}>CANCEL</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {/* HELLO */}{/* HELLO */}{/* HELLO */}{/* HELLO */}
-              {/* <Text style={{ fontSize: 20, color: '#fea505', marginRight: 5, fontFamily: 'DMSansSB' }}></Text> */}
-              {/* <Icon name="arrow-forward" size={30} color="black" /> */}
-            </View>
-          </TouchableOpacity>
-          
+      {selectedStoreItems.length > 0 && (
+        <View style={styles.footer}>
           <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              // alignItems: 'center',
-           
-              backgroundColor: '#0c356a',
-              paddingHorizontal: 20,
-              // position: 'absolute',
-              bottom: 0,
-              // width: '100%',
-              borderColor: '#fea505',
-              borderBottomWidth: 5,
-              borderLeftWidth:0.5,
-              borderRightWidth:2,
-              borderRadius: 20,
-              margin: 5,
-              marginRight: 10,
-              alignSelf: 'center',
-              padding:10,
-              flex:1
-            }}
-            onPress={handleConfirmOrder}
+            style={[styles.footerButton, { backgroundColor: '#fc2c1e' }]}
+            onPress={() => console.log('Cancel Order')}
           >
-            <Text style={{ fontSize: 20, color: '#fea505', fontFamily: 'DMSansSB' }}>Pay</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ fontSize: 20, color: '#fea505', marginRight: 5, fontFamily: 'DMSansSB' }}>{`₹ ${totalBillAmount}`}</Text>
+            <Text style={styles.footerButtonText}>CANCEL</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.footerButton, { backgroundColor: '#0c356a' }]}
+            onPress={() => console.log('Pay')}
+          >
+            <Text style={styles.footerButtonText}>Pay</Text>
+            <View style={styles.footerButtonRight}>
+              <Text style={styles.footerButtonAmount}>{`₹ ${totalBillAmount}`}</Text>
               <Icon name="arrow-forward" size={30} color="black" />
             </View>
           </TouchableOpacity>
-          
-          </View>
-          
-          </View>
-        </>
-      ) : (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Your cart is empty</Text>
         </View>
       )}
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  storeButtonsContainer: {
+    flexDirection: 'row',
+    padding: 10,
+  },
+  storeButton: {
+    padding: 10,
+    backgroundColor: '#ccc',
+    marginHorizontal: 5,
+    borderRadius: 5,
+  },
+  selectedStoreButton: {
+    backgroundColor: '#0c356a',
+  },
+  storeButtonText: {
+    color: '#fff',
+  },
+  emptyCartContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#ccc',
+    backgroundColor: '#fff',
+  },
+  footerButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    margin: 5,
+    padding: 10,
+  },
+  footerButtonText: {
+    fontSize: 20,
+    color: '#fff',
+  },
+  footerButtonRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  footerButtonAmount: {
+    fontSize: 20,
+    color: '#fea505',
+    marginRight: 5,
+  },
+});
 
 export default CartScreen;
