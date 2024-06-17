@@ -46,9 +46,9 @@ const StoresNear = ({societyId}) => {
   return (
     <FontLoader>
     <ScrollView>
-      <View style={{ height: 1, width: 77, backgroundColor: 'gray', marginTop: 10, marginLeft: 5 }} />
-      <Text style={{ fontSize: 17, fontWeight: '500', marginLeft: 5, marginTop: 5 ,fontFamily:"DMSansSB"}}>Stores Near Me</Text>
-      <Text style={{ fontSize: 15, marginLeft: 5 ,fontFamily:"DMSans"}}>Explore stores near your area</Text>
+      <View style={{ height: 1, width: 90, backgroundColor: 'gray', marginTop: 10, marginLeft: 15 }} />
+      <Text style={{ fontSize: 17, fontWeight: '500', marginLeft: 15, marginTop: 5 ,fontFamily:"DMSansSB"}}>Stores Near Me</Text>
+      <Text style={{ fontSize: 15, marginLeft: 15 ,fontFamily:"DMSans"}}>Explore stores near your area</Text>
 
       {shops.map((shop, index) => (
         <StoreCard

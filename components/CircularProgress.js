@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const strokeWidth = 4.2; // Adjust this to change the thickness of the progress bar
 const { PI } = Math;
-const r = 11; // Change this to the radius you want
+const r = 17; // Change this to the radius you want
 const size = r * 2 + strokeWidth; // Calculate the size based on the radius
 const cx = size / 2;
 const cy = size / 2;
@@ -40,7 +40,7 @@ const CircularProgress = ({ progress = 0 }) => { // Now accepts progress as a pe
           }}
         />
       </Svg>
-      <Ionicons name="shopping-outline" size={15} color="green" style={{ position: 'absolute',margin:2 }} /> 
+      <Ionicons name="shopping-outline" size={20} color="green" style={{ position: 'absolute',margin:2 }} /> 
     </View>
   );
 };

@@ -18,8 +18,8 @@ const NavBar = ({ cityName }) => {
   </TouchableOpacity> */}
   
   <TouchableOpacity style={{ flexDirection: 'row', flexGrow:2 }} >
-    <Text style={{ fontSize: 16, color: '#f4f3ee', fontWeight: '600',fontFamily:"DMSansB" }}>{cityName}</Text>
-    <Icon name="chevron-down-outline" size={20} color="#f3f3f3" />
+    <Text style={{ fontSize: 16, color: '#f4f3ee', fontWeight: '600',fontFamily:"DMSansB",marginLeft:20 ,marginTop:5}}>{cityName}</Text>
+    <Icon name="chevron-down-outline" size={20} color="#f3f3f3" style={{marginTop:7,marginLeft:7}}/>
   </TouchableOpacity>
   
   <View style={{ flexDirection: 'row', alignItems: 'center' ,justifyContent:'flex-end'}}>

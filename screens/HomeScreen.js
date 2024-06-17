@@ -63,8 +63,8 @@ const HomeScreen = () => {
     // -------------------------------AsyncStorage [UserData] Closed-------------------------
     return (
       <FontLoader>
-        <SafeAreaView style={{ flex: 1, }}>
-            <StatusBar backgroundColor="#0c356a" barStyle="light-content" />
+        <SafeAreaView style={{ flex: 1}}>
+            <StatusBar backgroundColor="#0c356a" barStyle="light-content"/>
             <MenuProvider>
             
                 {/* <SideMenu username={userName}/> */}
