@@ -20,9 +20,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000125"
       },
-      "package": "com.kartikey3603.DashCart"
+      "package": "com.heyKartikey.DashCart"
     },
     "web": {
       "favicon": "./assets/favicon.png"
