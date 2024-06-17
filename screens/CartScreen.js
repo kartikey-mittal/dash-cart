@@ -6,6 +6,7 @@ import CartNavBar from '../components/CartPage/CartNavBar';
 import BillingComponent from '../components/CartPage/BillingComponent';
 
 import { Client, Databases, Query } from 'appwrite';
+import FontLoader from '../FontLoader';
 
 const client = new Client();
 client.setEndpoint('https://cloud.appwrite.io/v1');
@@ -189,25 +190,46 @@ const CartScreen = () => {
     const mrp = mrpInfo.split(':')[1]?.trim() || 'N/A';  // Add trim() to remove any leading/trailing spaces
   
     return (
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
-        <View>
-          <Text style={{ fontSize: 16 }}>{product.Product_Name}</Text>
-          <Text style={{ fontSize: 16 }}>{product.Product_Image}</Text>
-          <Image source={{ uri: product.Product_Image }}  style={{height:50,width:50}}></Image>
-          <Text style={{ fontSize: 14, color: '#888' }}>Weight: {weight}</Text>
-          <Text style={{ fontSize: 14, color: '#888' }}>MRP: ₹{mrp}</Text>
-          <Text style={{ fontSize: 14, color: '#888' }}>Selling Price: ₹{sellingPrice}</Text>
+      <FontLoader>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc' ,margin: 10,
+        flexDirection: 'row',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 10,
+        marginVertical: 10,
+        alignItems: 'center',
+        
+        backgroundColor: 'white',
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 1,}}>
+                       <View style={{  borderRadius: 15, marginLeft: 10 }}>
+                       <Image source={{ uri: product.Product_Image }}  style={{width: 50, height: 80,}}></Image></View> 
+                       <View style={{ marginLeft: 0,backgroundColor:'transparent' }}> 
+        <Text style={{ fontSize: 16, fontWeight: '700', color: '#34495E' ,fontFamily:'DMSansB',marginTop:5}}>{product.Product_Name}</Text>
+        <Text style={{ fontSize: 13, marginLeft: 0 ,fontFamily:'DMSansSB',backgroundColor:'transparent',marginTop:5}}>Weight: {weight}</Text>
+        <View style={{ height: .4, width: 120, backgroundColor: '#EEEEEE', marginTop: 10, marginLeft: 0 ,borderWidth: .8,}} />
+
+        <View style={{display:"flex",flexDirection:"row",marginTop:2}}>
+                    <Text style={{ fontSize: 13, marginLeft: 0 ,fontFamily:'DMSansSB',color:'#0c356a',marginTop:7}}>₹{mrp}</Text>
+                    <Text style={{ fontSize: 15, marginLeft:5 ,fontFamily:'DMSansSB',color:'green',marginTop:5,marginBottom:5}}>₹{sellingPrice} </Text>
+                </View>
+
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => handleDecrementQuantity(item.productid, item.variantid)} style={{ padding: 10, backgroundColor: '#eee', borderRadius: 5 }}>
-            <Text style={{ fontSize: 20 }}>-</Text>
+          <TouchableOpacity onPress={() => handleDecrementQuantity(item.productid, item.variantid)} style={{ padding: 5, backgroundColor: '#eee', borderRadius: 5 ,paddingVertical:2}}>
+            <Text style={{ fontSize: 22,color:"red" ,paddingHorizontal:3}}>-</Text>
           </TouchableOpacity>
           <Text style={{ marginHorizontal: 10, fontSize: 16 }}>{item.qty}</Text>
-          <TouchableOpacity onPress={() => handleIncrementQuantity(item.productid, item.variantid)} style={{ padding: 10, backgroundColor: '#eee', borderRadius: 5 }}>
-            <Text style={{ fontSize: 20 }}>+</Text>
+          
+          <TouchableOpacity onPress={() => handleIncrementQuantity(item.productid, item.variantid)} style={{ padding: 5, backgroundColor: '#eee', borderRadius: 5,paddingVertical:2 }}>
+            <Text style={{ fontSize: 20 ,color:"green"}}>+</Text>
           </TouchableOpacity>
         </View>
       </View>
+      </FontLoader>
     );
   };
   
@@ -257,8 +279,8 @@ const CartScreen = () => {
           >
             <Text style={styles.footerButtonText}>Pay</Text>
             <View style={styles.footerButtonRight}>
-              <Text style={styles.footerButtonAmount}>{`₹ ${totalBillAmount}`}</Text>
-              <Icon name="arrow-forward" size={30} color="black" />
+              <Text style={styles.footerButtonAmount}>{`   ₹ ${totalBillAmount}`}</Text>
+              <Icon name="arrow-forward" size={25} color="whitesmoke" />
             </View>
           </TouchableOpacity>
         </View>

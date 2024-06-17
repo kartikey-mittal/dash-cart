@@ -7,8 +7,7 @@ import SearchBarStore from '../components/StorePageComponents/SearchBarStore';
 import StoreCategory from '../components/StorePageComponents/StoreCategory';
 import TestCard from './TestCard';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
 const StoreScreen = ({ route }) => {
   
   const { storeid, storename } = route.params;
@@ -270,7 +269,16 @@ const StoreScreen = ({ route }) => {
               onPress={() => handleBuyVariant(variant)}
               style={styles.variantButton}
             >
-              <Text>{`${variant.weight} - Rs. ${variant.price}`}</Text>
+              <View style={{display:"flex",flexDirection:"row"}}>
+              <Icon2
+                            name="local-offer"
+                            size={20}
+                            color='#F86443'
+                            style={{marginTop:5,marginRight:10}}
+                        />
+              <Text style={{fontSize:15,fontWeight:"600",marginTop:2}}>{`${variant.weight}`}</Text>
+              <Text style={{fontSize:17,fontWeight:"500",color:"green"}}>{` - Rs. ${variant.price}`}</Text>
+              </View>
             </TouchableOpacity>
           ))}
         </BottomSheetScrollView>

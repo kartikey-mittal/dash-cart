@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'; // replace with your actu
 import { useNavigation } from '@react-navigation/native';
 import FontLoader from '../FontLoader';
 import CircularProgress from './CircularProgress';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
 
 const StoreCard = ({ shopName, shopType, shopAddress, shopId, shopTicketSize, shopCurrentSize }) => {
     console.log('shop id :  ' + shopId);
@@ -49,25 +50,44 @@ const StoreCard = ({ shopName, shopType, shopAddress, shopId, shopTicketSize, sh
                 padding: 0,
                 marginVertical: 10,
                 alignItems: 'center',
-                height: 127,
+                
                 backgroundColor: 'white',
                 elevation: 2,
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 1 },
                 shadowOpacity: 0.1,
                 shadowRadius: 1,
+               
             }}
                 onPress={handlePress}>
-                <View style={{ backgroundColor: '#e6e6e6', width: 79, height: 75, borderRadius: 5, marginLeft: 10 }} />
-                <View style={{ marginLeft: 10,backgroundColor:'red' }}>
-                    <Text style={{ fontSize: 16, fontWeight: '500', marginLeft: 10, color: '#34495E' ,fontFamily:'DMSansB'}}>{shopName}</Text>
-                    <Text style={{ fontSize: 15, marginLeft: 10 ,fontFamily:'DMSansSB',backgroundColor:'yellow'}}>{shopType}</Text>
-                    <Text style={{ fontSize: 14, marginLeft: 10 ,fontFamily:'DMSans'}}>{shopAddress}</Text>
+                <View style={{ backgroundColor: '#e6e6e6', width: 90, height: 100, borderRadius: 15, marginLeft: 10 }} />
+                <View style={{ marginLeft: 10,backgroundColor:'transparent' }}>
+                    <Text style={{ fontSize: 16, fontWeight: '700', marginLeft: 10, color: '#34495E' ,fontFamily:'DMSansB',marginTop:5}}>{shopName}</Text>
+                    
+                        
+                        
+                    <Text style={{ fontSize: 13, marginLeft: 10 ,fontFamily:'DMSansSB',backgroundColor:'transparent',marginTop:2}}>{shopType}</Text>
+                    
+                    
+                    <View style={{display:"flex",flexDirection:"row",marginTop:5, marginLeft: 10}}>
+                    <Icon2
+                            name="delivery-dining"
+                            size={20}
+                            color='#F86443'
+                            style={{marginTop:0}}
+                        />
+                    <Text style={{ fontSize: 14, marginLeft: 5 ,fontFamily:'DMSans'}}>{shopAddress}</Text>
+                    </View>
+                    <View style={{ height: .4, width: 140, backgroundColor: 'grey', marginTop: 10, marginLeft: 10 ,borderWidth: .8,}} />
+                <View style={{display:"flex",flexDirection:"row",marginTop:2}}>
+                    <Text style={{ fontSize: 13, marginLeft: 10 ,fontFamily:'DMSansSB',color:'#0c356a',marginTop:7}}>⭐</Text>
+                    <Text style={{ fontSize: 15, marginLeft:3 ,fontFamily:'DMSansSB',color:'green',marginTop:5,marginBottom:5}}>5.0 </Text>
+                </View>
                 </View>
                 
                 <View style={{ flex: 1 }} />
                 <View style={{
-                    backgroundColor: '#20f495', width: 30, height: 127, borderTopRightRadius: 10,
+                    backgroundColor: '#20f495', width: 40, paddingVertical:48, borderTopRightRadius: 10,
                     borderBottomRightRadius: 10,justifyContent:'center'
                 }} >
                     <CircularProgress progress={percentage}/> 
